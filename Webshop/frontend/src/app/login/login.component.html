@@ -17,10 +17,22 @@
           />
           <fa-icon [icon]="faLock"></fa-icon>
         </p>
-        <p class="submit">
-          <input type="submit" name="sent" value="Login" />
-        </p>
+        <button class="login-btn" type="submit">LOGIN</button>
       </form>
+      <div class="or-container">
+        <p class="or">OR</p>
+      </div>
+      <div class="flex-center-items" style="margin-top: 2vh">
+        <button class="google-btn">
+          <fa-icon
+            [icon]="faGoogle"
+            style="position: absolute; left: 10px; top: 10px; font-size: 20px"
+          ></fa-icon>
+          LOG IN WITH GOOGLE
+        </button>
+      </div>
+
+      <span class="sign-up-text">Don't have an account? Sign up here.</span>
     </div>
   </div>
 </div>

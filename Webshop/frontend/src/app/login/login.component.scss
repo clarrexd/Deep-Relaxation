@@ -1,3 +1,5 @@
+$border-radius: 20px;
+
 .login-wrapper {
   display: flex;
   justify-content: center;
@@ -15,11 +17,10 @@
 
 .login-container {
   width: 400px;
-  height: 500px;
-  border-radius: 20px;
+  max-height: 550px;
+  border-radius: $border-radius;
 
   position: relative;
-  margin: 100px auto;
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -39,13 +40,11 @@
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-    margin-top: 0px;
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
   }
 
   .form {
-    width: 100%;
     margin-top: 40px;
     margin-left: 15px;
 
@@ -70,6 +69,7 @@
         line-height: 44px;
         transition: all 0.3s ease-out;
         pointer-events: none;
+        border-radius: $border-radius;
       }
     }
   }
@@ -89,6 +89,7 @@
     width: 200px;
     height: 24px;
 
+    border-radius: $border-radius;
     border: none;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -105,6 +106,45 @@
 
   .form input[type="checkbox"] {
     display: none;
+  }
+
+  .login-btn {
+    margin: 50px;
+    width: 270px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+    border-radius: $border-radius;
+    border: none;
+  }
+
+  .google-btn {
+    // margin: 65px;
+    width: 270px;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+    border-radius: $border-radius;
+    border: none;
   }
 
   .form input[type="submit"] {
@@ -125,5 +165,29 @@
 
     text-transform: uppercase;
     border: none;
+  }
+
+  .or-container {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin: 10px 0;
+  }
+
+  .or {
+    margin: 0 10px;
+
+    font-size: 14px;
+
+    color: #757575;
+  }
+
+  .sign-up-text {
+    display: flex;
+    padding-top: 5vh;
+    justify-content: center;
+    font-style: italic;
   }
 }

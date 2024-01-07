@@ -19,6 +19,7 @@ $border-radius: 20px;
   width: 400px;
   max-height: 550px;
   border-radius: $border-radius;
+  aspect-ratio: 3/4;
 
   position: relative;
   background: rgba(255, 255, 255, 0.05);

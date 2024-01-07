@@ -1,10 +1,10 @@
-$headerHeightL: 5vh;
+$headerHeight: 5vh;
 
 .header {
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: $headerHeightL;
+  height: $headerHeight;
 
   .navBar {
     width: 30vw;

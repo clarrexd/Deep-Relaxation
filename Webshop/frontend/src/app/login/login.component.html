@@ -1,5 +1,5 @@
 <div>
-  <div class="login-wrapper">
+  <div class="content-wrapper">
     <div class="login-container">
       <h1>Login</h1>
       <form class="form" method="post" action="#">
@@ -17,7 +17,9 @@
           />
           <fa-icon [icon]="faLock"></fa-icon>
         </p>
-        <button class="login-btn" type="submit">LOGIN</button>
+        <button class="login-btn" type="submit" (click)="toggleAuth()">
+          LOGIN
+        </button>
       </form>
       <div class="or-container">
         <p class="or">OR</p>
@@ -32,7 +34,17 @@
         </button>
       </div>
 
-      <span class="sign-up-text">Don't have an account? Sign up here.</span>
+      <span class="sign-up-text"
+        >Don't have an account?
+        <a
+          routerLink="/register"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          style="padding-left: 10px"
+        >
+          Sign up here.</a
+        ></span
+      >
     </div>
   </div>
 </div>

@@ -6,13 +6,15 @@ import { ProductsComponent } from './pages/products/products.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'products', component: ProductsComponent },
   { path: 'contact', component: ContactUsComponent },
-  { path: 'login', component: LoginComponent },
-  //   { path: '**', component: PageNotFoundComponent },
+  { path: 'login', component: LoginComponent, title: 'Login' },
+  { path: 'register', component: RegisterComponent, title: 'Sign up' },
+  { path: '**', redirectTo: 'home' },
   { path: '', component: HomeComponent },
 ];

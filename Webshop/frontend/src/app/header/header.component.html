@@ -8,7 +8,7 @@
         alt="Login"
         class="loginIcon"
       />
-      Login
+      {{ checkAuthentication() ? "Logout" : "Login" }}
     </div>
   </a>
 </section>

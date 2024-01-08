@@ -1,20 +1,5 @@
 $border-radius: 20px;
 
-.login-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 95vh;
-
-  background: rgb(26, 62, 83);
-  background: radial-gradient(
-    circle,
-    rgba(26, 62, 83, 1) 0%,
-    rgba(100, 42, 108, 1) 35%,
-    rgba(68, 0, 255, 1) 100%
-  );
-}
-
 .login-container {
   width: 400px;
   max-height: 550px;
@@ -127,6 +112,17 @@ $border-radius: 20px;
 
     border-radius: $border-radius;
     border: none;
+  }
+
+  .login-btn:hover,
+  .google-btn:hover {
+    background-color: #4aa3df;
+  }
+
+  .login-btn:active,
+  .google-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
   .google-btn {

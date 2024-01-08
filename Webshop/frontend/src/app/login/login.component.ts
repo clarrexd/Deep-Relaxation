@@ -32,4 +32,11 @@ export class LoginComponent {
   toggleAuth() {
     return this.authservice.toggleAuthentication();
   }
+
+  login() {
+    if (this.authservice.isAuthenticated() === true) {
+      return;
+    }
+    this.authservice.login();
+  }
 }

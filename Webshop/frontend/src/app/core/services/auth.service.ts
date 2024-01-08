@@ -8,10 +8,13 @@ export class AuthService {
 
   login(): void {
     this.isLoggedIn = true;
+    alert('You have successfully logged in!');
   }
 
   logout(): void {
     this.isLoggedIn = false;
+    alert('You have successfully logged out.');
+    //Maybe change to a modal?
   }
 
   isAuthenticated(): boolean {

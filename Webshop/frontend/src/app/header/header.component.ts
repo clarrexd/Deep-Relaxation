@@ -31,4 +31,10 @@ export class HeaderComponent {
   checkAuthentication() {
     return this.authservice.checkAuthentication();
   }
+
+  logoutFromHeader() {
+    if (this.checkAuthentication() === true) {
+      this.logout();
+    }
+  }
 }

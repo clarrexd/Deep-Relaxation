@@ -2,7 +2,11 @@
   <nav id="navBar" class="navBar">Home About Products Contact us</nav>
   <div id="title" class="title">Deep Relaxation</div>
   <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">
-    <div id="LoginComponent" class="LoginComponent">
+    <div
+      id="LoginComponent"
+      class="LoginComponent"
+      (click)="logoutFromHeader()"
+    >
       <img
         src="https://pic.onlinewebfonts.com/thumbnails/icons_202755.svg"
         alt="Login"

@@ -12,4 +12,134 @@ $border-radius: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-left: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+  h1 {
+    line-height: 55px;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: "Open Sans", sans-serif;
+    text-transform: uppercase;
+    color: #fff;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  .form {
+    margin-top: 40px;
+    margin-left: 15px;
+
+    .field {
+      position: relative;
+      margin: 0 50px;
+
+      fa-icon {
+        font-size: 18px;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        height: 44px;
+        width: 44px;
+        color: #f7f3eb;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        line-height: 44px;
+        transition: all 0.3s ease-out;
+        pointer-events: none;
+        border-radius: $border-radius;
+      }
+    }
+  }
+
+  ::-webkit-input-placeholder {
+    color: #ffffff;
+    font-family: "Open Sans";
+  }
+
+  .form input[type="text"],
+  input[type="password"] {
+    font-family: "Open Sans", Calibri, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 10px 15px 10px 55px;
+    position: relative;
+    width: 200px;
+    height: 24px;
+
+    border-radius: $border-radius;
+    border: none;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    color: rgb(255, 255, 255);
+    transition: color 0.3s ease-out;
+  }
+
+  .form input[type="text"] {
+    margin-bottom: 15px;
+  }
+
+  .form input[type="checkbox"] {
+    display: none;
+  }
+
+  .register-btn {
+    margin: 50px;
+    width: 270px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+    border-radius: $border-radius;
+    border: none;
+  }
+
+  .register-btn:hover {
+    background-color: #4aa3df;
+  }
+
+  .register-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .form input[type="submit"] {
+    margin: 50px;
+    width: 270px;
+    text-align: center;
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    padding: 12px 0;
+
+    color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+
+    text-transform: uppercase;
+    border: none;
+  }
 }

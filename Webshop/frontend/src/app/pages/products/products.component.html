@@ -1,1 +1,11 @@
-<p>products works!</p>
+<div class="content-wrapper">
+  <div *ngFor="let product of productsList">
+    <span>
+      {{ product.name }}
+    </span>
+  </div>
+
+  <!-- <div *ngIf="productsList | async as product">
+        {{product.name}}
+    </div> -->
+</div>

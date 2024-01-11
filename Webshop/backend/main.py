@@ -1,10 +1,13 @@
-#python3 -m uvicorn main:app --reload 
+#python3 -m uvicorn main:app --reload
+#endpoint = localhost:8000/[endpoint]
 from typing import Union
 from fastapi import FastAPI, HTTPException, Depends
 import database
 import asyncio
 
 db=database.Database()
+
+#Creates an asynchronous task with the function connectToDatabase() from database.py inside the main event loop initiated by uvicorn
 asyncio.create_task(db.connectToDatabase())
 
 
@@ -23,8 +26,8 @@ async def read_root():
 @app.get('/products')
 async def getAllProducts():
     query = 'SELECT * FROM products'
-    result = await db.fetchFromDB(query)
-    return result
+    data = await db.fetchFromDB(query)
+    return data
 
 
     

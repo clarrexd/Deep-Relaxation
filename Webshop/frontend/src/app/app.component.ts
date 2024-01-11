@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/angular-fontawesome';
 import { faUser, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
     CommonModule,
     RouterOutlet,
     HeaderComponent,
+    HttpClientModule,
     RouterLink,
     RouterLinkActive,
     FontAwesomeModule,

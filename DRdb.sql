@@ -46,5 +46,5 @@ ALTER TABLE `orders_products` ADD FOREIGN KEY (`products_id`) REFERENCES `produc
 
 #INSERT INTO products (name,description,price,color, size, stock)
 #VALUES ('Morning robe Premium Deluxe', 'Very nice and comfortable morning robe', '$599', 'Melancholy Blue', 'M', 4);
-
+#test
 

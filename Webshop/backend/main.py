@@ -7,9 +7,6 @@ import asyncio
 
 db=database.Database()
 
-#Creates an asynchronous task with the function connectToDatabase() from database.py inside the main event loop initiated by uvicorn
-asyncio.create_task(db.connectToDatabase())
-
 
 app = FastAPI()
 
@@ -23,6 +20,7 @@ async def read_root():
 # async def read_product(product_id: int, q: Union[str, None] = None):
 #     return  {"product_id": product_id, "q": q}
 
+#Fetches all products from the products table in the database
 @app.get('/products')
 async def getAllProducts():
     query = 'SELECT * FROM products'

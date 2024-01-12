@@ -3,6 +3,7 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../core/services/auth.service';
 import { CommonModule } from '@angular/common';
+import { faUser } from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -18,6 +19,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  faUser = faUser;
   constructor(private authservice: AuthService) {}
 
   login(): void {

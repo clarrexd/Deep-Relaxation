@@ -9,12 +9,23 @@ $headerHeight: 5vh;
   .navBar {
     width: 30vw;
     padding-left: 2vw;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+
+      li {
+        list-style: none;
+        padding: 0.5vw;
+      }
+    }
   }
 
   .title {
     display: flex;
     justify-content: center;
     width: 35vw;
+    font-size: 24px;
   }
 
   .LoginComponent {

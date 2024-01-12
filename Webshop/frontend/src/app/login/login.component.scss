@@ -19,7 +19,7 @@ $border-radius: 20px;
     font-weight: bold;
     font-family: "Open Sans", sans-serif;
     text-transform: uppercase;
-    color: #fff;
+    color: #000000;
     text-align: center;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
@@ -45,7 +45,7 @@ $border-radius: 20px;
         position: absolute;
         height: 44px;
         width: 44px;
-        color: #f7f3eb;
+        color: #000000;
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
         border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -61,7 +61,7 @@ $border-radius: 20px;
   }
 
   ::-webkit-input-placeholder {
-    color: #ffffff;
+    color: #000000;
     font-family: "Open Sans";
   }
 
@@ -82,7 +82,7 @@ $border-radius: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
     transition: color 0.3s ease-out;
   }
 
@@ -103,7 +103,7 @@ $border-radius: 20px;
     font-weight: bold;
     padding: 12px 0;
 
-    color: #fff;
+    color: #000000;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -133,7 +133,7 @@ $border-radius: 20px;
     font-weight: bold;
     padding: 12px 0;
 
-    color: #fff;
+    color: #000000;
     background: rgba(255, 255, 255, 0.05);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.2);

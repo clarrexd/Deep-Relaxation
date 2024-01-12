@@ -6,6 +6,10 @@ $headerHeight: 5vh;
   align-items: center;
   height: $headerHeight;
 
+  font-weight: bold;
+  font-family: "Open Sans", sans-serif;
+  text-transform: uppercase;
+
   .navBar {
     width: 30vw;
     padding-left: 2vw;

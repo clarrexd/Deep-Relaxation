@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, NavigationExtras } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './pages/about/about.component';
@@ -7,6 +7,7 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './register/register.component';
+import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
   { path: 'contact', component: ContactUsComponent },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },
+  { path: 'dashboard', component: UserDashboardComponent },
   { path: '**', redirectTo: 'home' },
   { path: '', component: HomeComponent },
 ];

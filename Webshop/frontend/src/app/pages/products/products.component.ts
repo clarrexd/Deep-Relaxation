@@ -5,13 +5,7 @@ import { CommonModule } from '@angular/common';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCommonModule } from '@angular/material/core';
 import { CartService } from '../../core/services/cart.service';
-
-interface productsInterface {
-  name: string;
-  description: string;
-  price: string;
-  imageURL: string;
-}
+import { LocalstorageService } from '../../core/services/localstorage.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +15,11 @@ interface productsInterface {
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
-  constructor(private http: HttpClient, private cartservice: CartService) {}
+  constructor(
+    private http: HttpClient,
+    private cartservice: CartService,
+    private localstorage: LocalstorageService
+  ) {}
 
   //create interface needed?
   productsList: any = [];
@@ -35,7 +33,13 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  addToCart(item: any) {
+    this.cartservice.cartList.push(item);
+  }
+
   ngOnInit(): void {
     this.getProductsFromDB();
+    const getItemsIfAny = this.localstorage.getItemCart();
+    this.cartservice.cartList = getItemsIfAny;
   }
 }

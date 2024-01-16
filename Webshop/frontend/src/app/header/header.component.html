@@ -37,7 +37,12 @@
   </nav>
   <div id="title" class="title">𝓓𝓮𝓮𝓹 𝓡𝓮𝓵𝓪𝔁𝓪𝓽𝓲𝓸𝓷</div>
 
-  <a routerLink="cart" routerLinkActive="active" ariaCurrentWhenActive="page">
+  <a
+    routerLink="cart"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    (click)="convertCartToLS()"
+  >
     <i class="material-icons cart-icon">shopping_cart</i></a
   >
 

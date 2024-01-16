@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../core/services/cart.service';
+import { LocalstorageService } from '../core/services/localstorage.service';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +26,8 @@ export class HeaderComponent {
   faUser = faUser;
   constructor(
     private authservice: AuthService,
-    private cartservice: CartService
+    private cartservice: CartService,
+    private localstorage: LocalstorageService
   ) {}
 
   login(): void {
@@ -44,5 +46,9 @@ export class HeaderComponent {
     if (this.checkAuthentication() === true) {
       this.logout();
     }
+  }
+
+  convertCartToLS() {
+    this.localstorage.setItemCart(this.cartservice.cartList);
   }
 }

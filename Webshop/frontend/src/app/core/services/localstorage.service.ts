@@ -7,11 +7,14 @@ export class LocalstorageService {
   constructor() {}
 
   setItemCart(list: any) {
-    window.localStorage.setItem('cart', JSON.stringify(list));
+    localStorage.setItem('cart', JSON.stringify(list));
   }
 
   getItemCart() {
-    const getItem = window.localStorage.getItem('cart');
-    return JSON.stringify(getItem);
+    const getItems = JSON.parse(localStorage.getItem('cart') as string);
+    if (getItems === null) {
+      return [];
+    }
+    return getItems;
   }
 }

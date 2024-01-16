@@ -1,1 +1,14 @@
-<p>cart works!</p>
+<section class="full-width-height flex-column">
+  <ng-container class="cart-items-container" *ngFor="let cartItem of lsItems">
+    <div>
+      {{ cartItem.name }}
+      Size: {{ cartItem.size }}
+    </div>
+    <div>
+      {{ cartItem.quantity }}
+    </div>
+    <div>
+      {{ cartItem.price }}
+    </div>
+  </ng-container>
+</section>

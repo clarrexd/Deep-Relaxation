@@ -1,12 +1,22 @@
-<div class="content-wrapper">
-  <div *ngFor="let product of productsList">
-    <span>
+<h1>PRODUCTS</h1>
+<div class="full-width-height flex-row" style="background-image: none">
+  <div *ngFor="let product of productsList" class="product-container">
+    <h4>
       {{ product.name }}
-    </span>
-    <img src="{{ product.imageURL }}" alt="" />
-  </div>
+    </h4>
+    <img src="{{ product.imageURL }}" alt="" class="product-img" />
+    <span>{{ product.description }}</span>
+    <p>{{ product.price }}</p>
 
-  <!-- <div *ngIf="productsList | async as product">
-        {{product.name}}
-    </div> -->
+    <div>
+      Quantity:
+      <select name="quantity" id="quantity" aria-placeholder="Quantity">
+        <option value="1">1</option>
+        <option value="2">2</option>
+      </select>
+    </div>
+    <section class="addtocart-btn-container">
+      <button>Add to cart</button>
+    </section>
+  </div>
 </div>

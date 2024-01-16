@@ -30,7 +30,7 @@ import { GoogleSigninService } from '../core/services/google-signin.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   faUser = faUser;
   faLock = faLock;
   faGoogle = faGoogle;
@@ -44,12 +44,12 @@ export class LoginComponent implements OnInit {
   delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  async ngOnInit(): Promise<void> {
-    console.warn('See this first');
-    this.delay(5000);
-    await this.googleSignIn.initGoogleSignIn();
-    console.warn('This must also be seen');
-  }
+  // async ngOnInit(): Promise<void> {
+  //   console.warn('See this first');
+  //   this.delay(5000);
+  //   await this.googleSignIn.initGoogleSignIn();
+  //   console.warn('This must also be seen');
+  // }
 
   toggleAuth() {
     return this.authservice.toggleAuthentication();

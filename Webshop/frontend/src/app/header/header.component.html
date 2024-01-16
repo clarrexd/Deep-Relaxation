@@ -37,20 +37,25 @@
   </nav>
   <div id="title" class="title">𝓓𝓮𝓮𝓹 𝓡𝓮𝓵𝓪𝔁𝓪𝓽𝓲𝓸𝓷</div>
 
+  <a routerLink="cart" routerLinkActive="active" ariaCurrentWhenActive="page">
+    <i class="material-icons cart-icon">shopping_cart</i></a
+  >
+
+  <!-- TO DO: Style anchor tag, after, hover etc. Add number for items in cart on icon 16/1 -->
   <!-- TO DO: Wrap login anchor in button tag 12/1 -->
-  <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page">
-    <div
-      id="LoginComponent"
-      class="LoginComponent"
-      (click)="logoutFromHeader()"
+  <div class="justify-end" style="flex-grow: 1">
+    <a
+      routerLink="login"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
     >
-      <!-- IMAGE NOT WORKING -->
-      <!-- <img
-        src="https://pic.onlinewebfonts.com/thumbnails/icons_202755.svg"
-        alt="Login"
-        class="loginIcon"
-      /> -->
-      {{ checkAuthentication() ? "Logout" : "Login" }}
-    </div>
-  </a>
+      <div
+        id="LoginComponent"
+        class="LoginComponent"
+        (click)="logoutFromHeader()"
+      >
+        {{ checkAuthentication() ? "Logout" : "Login" }}
+      </div>
+    </a>
+  </div>
 </section>

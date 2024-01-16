@@ -4,6 +4,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AuthService } from '../core/services/auth.service';
 import { CommonModule } from '@angular/common';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
+import { MatIconModule } from '@angular/material/icon';
+import { CartService } from '../core/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -14,13 +16,17 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
     RouterLinkActive,
     FontAwesomeModule,
     CommonModule,
+    MatIconModule,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
   faUser = faUser;
-  constructor(private authservice: AuthService) {}
+  constructor(
+    private authservice: AuthService,
+    private cartservice: CartService
+  ) {}
 
   login(): void {
     this.authservice.login();

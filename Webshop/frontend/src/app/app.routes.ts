@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +18,7 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },
   { path: 'dashboard', component: UserDashboardComponent },
+  { path: 'cart', component: CartComponent },
   { path: '**', redirectTo: 'home' },
   { path: '', component: HomeComponent },
 ];

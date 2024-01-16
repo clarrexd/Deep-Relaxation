@@ -12,24 +12,24 @@ export class GoogleSigninService {
 
   private auth2: any;
 
-  initGoogleSignIn(): Promise<void> {
-    return new Promise((resolve, reject) => {
-      gapi.load('auth2', () => {
-        gapi.auth2
-          .init({
-            client_id:
-              '1056239443682-ohm81qmjcte88unluf6e8u5ehb3pbdv3.apps.googleusercontent.com',
-          })
-          .then((auth2: any) => {
-            this.auth2 = auth2;
-            resolve();
-          })
-          .catch((error: any) => {
-            reject(error);
-          });
-      });
-    });
-  }
+  // initGoogleSignIn(): Promise<void> {
+  //   return new Promise((resolve, reject) => {
+  //     gapi.load('auth2', () => {
+  //       gapi.auth2
+  //         .init({
+  //           client_id:
+  //             '1056239443682-ohm81qmjcte88unluf6e8u5ehb3pbdv3.apps.googleusercontent.com',
+  //         })
+  //         .then((auth2: any) => {
+  //           this.auth2 = auth2;
+  //           resolve();
+  //         })
+  //         .catch((error: any) => {
+  //           reject(error);
+  //         });
+  //     });
+  //   });
+  // }
 
   signIn(): Promise<any> {
     return this.auth2.signIn();

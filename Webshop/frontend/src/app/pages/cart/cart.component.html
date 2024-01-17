@@ -1,6 +1,6 @@
 <section class="full-width-height flex-column">
   <ng-container class="cart-items-container" *ngFor="let cartItem of lsItems">
-    <div>
+    <div class="flex-row">
       {{ cartItem.name }}
       Size: {{ cartItem.size }}
     </div>
@@ -11,4 +11,5 @@
       {{ cartItem.price }}
     </div>
   </ng-container>
+  <button class="purchase-btn">Confirm purchase</button>
 </section>

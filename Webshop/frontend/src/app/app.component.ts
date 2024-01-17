@@ -9,10 +9,13 @@ import {
 import { faUser, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './footer/footer.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss',
   imports: [
     CommonModule,
     RouterOutlet,
@@ -21,9 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
     RouterLink,
     RouterLinkActive,
     FontAwesomeModule,
+    FooterComponent,
   ],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Deep Relaxation';

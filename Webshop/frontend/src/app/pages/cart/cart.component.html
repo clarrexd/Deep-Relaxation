@@ -1,15 +1,17 @@
-<section class="full-width-height flex-column">
-  <ng-container class="cart-items-container" *ngFor="let cartItem of lsItems">
-    <div class="flex-row">
-      {{ cartItem.name }}
-      Size: {{ cartItem.size }}
+<section class="full-width-height" style="display: grid; place-items: center">
+  <h1>My cart</h1>
+  <div class="cart-items-container" *ngFor="let cartItem of lsItems">
+    <img src="{{ cartItem.imageURL }}" alt="" />
+    <div class="flex-center-items">
+      <h4>{{ cartItem.name }}</h4>
+    </div>
+    <span>Size: {{ cartItem.size }}</span>
+    <div>
+      <span>{{ cartItem.quantity }}</span>
     </div>
     <div>
-      {{ cartItem.quantity }}
+      <span> {{ cartItem.price }}</span>
     </div>
-    <div>
-      {{ cartItem.price }}
-    </div>
-  </ng-container>
-  <button class="purchase-btn">Confirm purchase</button>
+  </div>
+  <button class="purchase-btn">Proceed to checkout</button>
 </section>

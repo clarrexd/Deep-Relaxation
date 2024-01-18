@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
@@ -10,6 +10,8 @@ import { faUser, far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
+import { CartService } from './core/services/cart.service';
+import { LocalstorageService } from './core/services/localstorage.service';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +29,19 @@ import { FooterComponent } from './footer/footer.component';
     FooterComponent,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Deep Relaxation';
 
-  constructor(library: FaIconLibrary) {
+  constructor(
+    library: FaIconLibrary,
+    private cartservice: CartService,
+    private localstorage: LocalstorageService
+  ) {
     library.addIconPacks(fas, far);
     library.addIcons(faUser); // add FA icons
+  }
+
+  ngOnInit(): void {
+    this.cartservice.cartList = this.localstorage.getItemCart();
   }
 }

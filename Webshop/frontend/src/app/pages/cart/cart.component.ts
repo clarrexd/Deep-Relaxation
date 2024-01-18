@@ -11,15 +11,11 @@ import { LocalstorageService } from '../../core/services/localstorage.service';
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
-  constructor(private localstorage: LocalstorageService) {}
+  constructor(private cartservice: CartService) {}
 
   lsItems: any = [];
 
   ngOnInit(): any {
-    this.lsItems = this.localstorage.getItemCart();
+    this.lsItems = this.cartservice.cartList;
   }
-
-  //LOCALSTORAGE RESETS WHEN PAGE REFRESHES ON A DIFFERENT PATH (not product or cart)
-
-  //Change needed: setItem to LS on add to cart buttonclick instead of cart component oninit
 }

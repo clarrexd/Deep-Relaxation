@@ -16,7 +16,10 @@ export class CartComponent implements OnInit {
   lsItems: any = [];
 
   ngOnInit(): any {
-    const getLSitems = this.localstorage.getItemCart();
-    this.lsItems = getLSitems;
+    this.lsItems = this.localstorage.getItemCart();
   }
+
+  //LOCALSTORAGE RESETS WHEN PAGE REFRESHES ON A DIFFERENT PATH (not product or cart)
+
+  //Change needed: setItem to LS on add to cart buttonclick instead of cart component oninit
 }

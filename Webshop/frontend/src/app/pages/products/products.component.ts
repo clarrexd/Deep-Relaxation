@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,6 @@ export class ProductsComponent implements OnInit {
     private localstorage: LocalstorageService
   ) {}
 
-  //create interface needed?
   productsList: any = [];
 
   //Fetching products from database
@@ -34,12 +33,21 @@ export class ProductsComponent implements OnInit {
   }
 
   addToCart(item: any) {
+    let fetchedItems: Array<any> = this.localstorage.fetchItemsFromLS();
+
+    if (fetchedItems === null) {
+      fetchedItems = [];
+    }
+
+    this.cartservice.cartList = fetchedItems;
     this.cartservice.cartList.push(item);
+    this.localstorage.setItemCart(this.cartservice.cartList);
+
+    // this.cartservice.cartList.push(item);
   }
 
   ngOnInit(): void {
     this.getProductsFromDB();
-    const getItemsIfAny = this.localstorage.getItemCart();
-    this.cartservice.cartList = getItemsIfAny;
+    this.cartservice.cartList = this.localstorage.getItemCart();
   }
 }

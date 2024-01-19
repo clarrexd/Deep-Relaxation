@@ -9,11 +9,13 @@ import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'products', component: ProductsComponent },
+  { path: 'products/:product_id', component: ProductDetailsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'login', component: LoginComponent, title: 'Login' },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },

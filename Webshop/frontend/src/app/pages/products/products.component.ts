@@ -7,6 +7,8 @@ import { MatCommonModule } from '@angular/material/core';
 import { CartService } from '../../core/services/cart.service';
 import { LocalstorageService } from '../../core/services/localstorage.service';
 import { Router } from '@angular/router';
+import { BackendApiService } from '../../core/services/backend-api.service';
+import { Product } from '../../core/interfaces';
 
 @Component({
   selector: 'app-products',
@@ -23,7 +25,7 @@ export class ProductsComponent implements OnInit {
     private router: Router
   ) {}
 
-  productsList: any = [];
+  productsList: Product[] = [];
 
   //Fetching products from database
   getProductsFromDB() {
@@ -46,9 +48,9 @@ export class ProductsComponent implements OnInit {
     this.localstorage.setItemCart(this.cartservice.cartList);
   }
 
-  goToProductDetail() {
+  goToProductDetail(product: Product) {
     // Navigate to the product detail route with the current product id
-    this.router.navigate(['/products', this.productsList.id]);
+    this.router.navigate(['/products', product.id]);
   }
 
   ngOnInit(): void {

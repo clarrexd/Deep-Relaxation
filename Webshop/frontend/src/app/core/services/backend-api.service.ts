@@ -19,7 +19,7 @@ export class BackendApiService {
   //     });
   // }
 
-  //Fetch productdetails for specific product matching with id
+  // Fetch productdetails for specific product matching with id
   // fetchProductDetails() {
   //   this.http
   //     .get(`http://localhost:8000/products/${this.id}`)

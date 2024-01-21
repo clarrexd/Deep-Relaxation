@@ -30,7 +30,7 @@ export class ProductsComponent implements OnInit {
   //Fetching products from database
   getProductsFromDB() {
     this.http
-      .get('http://localhost:8000/products')
+      .get('http://localhost:8000/products', { withCredentials: true })
       .subscribe((response: any) => {
         this.productsList = response;
       });

@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-dashboard.component.html',
-  styleUrl: './user-dashboard.component.scss'
+  styleUrl: './user-dashboard.component.scss',
 })
 export class UserDashboardComponent {
-
+  constructor() {}
 }

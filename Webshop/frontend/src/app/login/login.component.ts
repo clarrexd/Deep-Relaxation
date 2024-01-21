@@ -45,9 +45,6 @@ export class LoginComponent implements OnInit {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
-  decodeJWTToken(token: any) {
-    return JSON.parse(atob(token.split('.')[1]));
-  }
   // handleOauthResponse(response: any) {
   //   const responsePayload = this.decodeJWTToken(response.credential);
   //   console.log(responsePayload);
@@ -55,12 +52,16 @@ export class LoginComponent implements OnInit {
   //   this.router.navigate(['dashboard']);
   // }
 
-  ngOnInit() {
+  decodeJWTToken(token: any) {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+
+  ngOnInit(): void {
     (globalThis as any).handleOauthResponse = (response: any) => {
       const responsePayload = this.decodeJWTToken(response.credential);
       console.log(responsePayload);
       sessionStorage.setItem('loggedinUser', JSON.stringify(responsePayload));
-      this.router.navigate(['dashboard']);
+      console.log('pls show I beg');
     };
   }
 

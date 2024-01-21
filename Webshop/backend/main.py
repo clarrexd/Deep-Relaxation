@@ -15,7 +15,7 @@ app = FastAPI()
 #Enabling CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You might want to restrict this to specific origins in production
+    allow_origins=["http://localhost:4200"], 
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -41,8 +41,10 @@ async def getAllProducts():
 @app.post('/redirect-login')
 async def redirectGoogleLoginToDashboard():
     frontend_port = 4200
-    dashboard_url = f'http://localhost:{frontend_port}/dashboard'
-    return RedirectResponse(url=dashboard_url)
+    dashboard_url = f'http://localhost:{frontend_port}/login'
+    return RedirectResponse(url=dashboard_url, status_code=303)
+
+
     
 
 

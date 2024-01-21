@@ -9,15 +9,24 @@ import { LocalstorageService } from '../../core/services/localstorage.service';
 import { Router } from '@angular/router';
 import { BackendApiService } from '../../core/services/backend-api.service';
 import { Product } from '../../core/interfaces';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, MatCommonModule, MatSelectModule],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    MatCommonModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss',
 })
 export class ProductsComponent implements OnInit {
+  quantityControl = new FormControl();
+
   constructor(
     private http: HttpClient,
     private cartservice: CartService,
@@ -33,6 +42,9 @@ export class ProductsComponent implements OnInit {
       .get('http://localhost:8000/products', { withCredentials: true })
       .subscribe((response: any) => {
         this.productsList = response;
+        this.productsList.forEach((product) => {
+          product.quantity = 1;
+        });
       });
   }
 

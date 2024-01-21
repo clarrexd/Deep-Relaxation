@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import {
   FaIconLibrary,
@@ -17,13 +18,30 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
     RouterLinkActive,
     RouterOutlet,
     FontAwesomeModule,
+    HttpClientModule,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {
-  constructor(library: FaIconLibrary) {}
+export class RegisterComponent implements OnInit {
+  constructor(library: FaIconLibrary, private http: HttpClient) {}
 
   faUser = faUser;
   faLock = faLock;
+
+  registerUser(username: string, password: string, email: string) {
+    this.http
+      .post('http://localhost:8000/register-user', {
+        username: username,
+        password: password,
+        email: email,
+      })
+      .subscribe((response: any) => {
+        console.log(response);
+      });
+  }
+
+  ngOnInit(): void {
+    // console.log(this.registerUser('clarre', 'hehe', 'aa@okej'));
+  }
 }

@@ -12,9 +12,14 @@ import { CartService } from '../../core/services/cart.service';
 export class CartComponent implements OnInit {
   constructor(private cartservice: CartService) {}
 
-  lsItems: any = [];
+  lsItems: Array<any> = [];
+  totalSum: any = 0;
 
   ngOnInit(): any {
     this.lsItems = this.cartservice.cartList;
+    this.totalSum = this.lsItems.reduce(function (acc, obj) {
+      return acc + obj.price * obj.quantity;
+    }, 0);
+    console.log(this.totalSum);
   }
 }

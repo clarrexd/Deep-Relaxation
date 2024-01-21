@@ -4,12 +4,16 @@ from typing import Union
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
+from datetime import datetime
+
+from pymysql import IntegrityError
 import database
+from models import User
 import asyncio
 
 db=database.Database()
 
-
+# datetime.utcnow()
 app = FastAPI()
 
 #Enabling CORS
@@ -26,7 +30,7 @@ app.add_middleware(
 @app.get("/products/{product_id}")
 async def read_product(product_id: int):
     query = f'SELECT * FROM products WHERE id={product_id}'
-    data = await db.fetchFromDB(query)
+    data = await db.getFromDB(query)
     return data
 
 
@@ -35,14 +39,33 @@ async def read_product(product_id: int):
 @app.get('/products')
 async def getAllProducts():
     query = 'SELECT * FROM products'
-    data = await db.fetchFromDB(query)
+    data = await db.getFromDB(query)
     return data
 
-@app.post('/redirect-login')
-async def redirectGoogleLoginToDashboard():
-    frontend_port = 4200
-    dashboard_url = f'http://localhost:{frontend_port}/login'
-    return RedirectResponse(url=dashboard_url, status_code=303)
+
+@app.get('/verify-registered-user/{user_id}')
+async def findLatestRegisteredUser(user_id: int):
+    """Endpoint for veryfying that the user was registered correctly to the database"""
+    query = f'SELECT * FROM users WHERE id={user_id}'
+    data = await db.getFromDB(query)
+    return data
+
+
+
+
+@app.post('/register-user')
+async def registerUser(user:User):
+    """Endpoint for registering users to the database. Will return a list of all users registered"""
+    try:
+        result = await db.insertUser(user)
+        return result
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
+        
+
+
+
+    
 
 
     

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private isLoggedIn: boolean = false;
+
+  constructor(private router: Router) {}
 
   login(): void {
     this.isLoggedIn = true;
@@ -14,10 +17,14 @@ export class AuthService {
   logout(): void {
     this.isLoggedIn = false;
     alert('You have successfully logged out.');
+    sessionStorage.clear();
     //Maybe change to a modal?
   }
 
   isAuthenticated(): boolean {
+    if (!this.isLoggedIn && sessionStorage.getItem('loggedInUser') !== null) {
+      this.isLoggedIn = true;
+    }
     return this.isLoggedIn;
   }
 
@@ -38,5 +45,11 @@ export class AuthService {
       console.log('Login attempt failed');
     }
     return isAuthenticated;
+  }
+
+  loginGuard(): void {
+    if (this.isAuthenticated()) {
+      this.router.navigate(['dashboard']);
+    }
   }
 }

@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './footer/footer.component';
 import { CartService } from './core/services/cart.service';
 import { LocalstorageService } from './core/services/localstorage.service';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -40,7 +41,8 @@ export class AppComponent implements OnInit {
   constructor(
     library: FaIconLibrary,
     private cartservice: CartService,
-    private localstorage: LocalstorageService
+    private localstorage: LocalstorageService,
+    private authService: AuthService
   ) {
     library.addIconPacks(fas, far);
     library.addIcons(faUser); // add FA icons
@@ -48,5 +50,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartservice.cartList = this.localstorage.getItemCart();
+    this.authService.isAuthenticated();
   }
 }

@@ -10,6 +10,8 @@ import { RegisterComponent } from './register/register.component';
 import { UserDashboardComponent } from './pages/user-dashboard/user-dashboard.component';
 import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
+import { inject } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,7 +19,12 @@ export const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'products/:product_id', component: ProductDetailsComponent },
   { path: 'contact', component: ContactUsComponent },
-  { path: 'login', component: LoginComponent, title: 'Login' },
+  {
+    path: 'login',
+    component: LoginComponent,
+    title: 'Login',
+    canActivate: [() => inject(AuthService).loginGuard()],
+  },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },
   { path: 'dashboard', component: UserDashboardComponent },
   { path: 'cart', component: CartComponent },

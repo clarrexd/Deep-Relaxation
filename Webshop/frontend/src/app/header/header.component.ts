@@ -30,21 +30,13 @@ export class HeaderComponent {
     private localstorage: LocalstorageService
   ) {}
 
-  login(): void {
-    this.authservice.login();
-  }
-
-  logout(): void {
-    this.authservice.logout();
-  }
-
   checkAuthentication() {
     return this.authservice.checkAuthentication();
   }
 
   logoutFromHeader() {
     if (this.checkAuthentication() === true) {
-      this.logout();
+      this.authservice.logout();
     }
   }
 

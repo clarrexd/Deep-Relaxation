@@ -16,6 +16,10 @@ import {
 } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { GoogleSigninService } from '../core/services/google-signin.service';
+import {
+  SocialAuthService,
+  GoogleSigninButtonModule,
+} from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +30,7 @@ import { GoogleSigninService } from '../core/services/google-signin.service';
     RouterLink,
     RouterLinkActive,
     CommonModule,
+    GoogleSigninButtonModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -36,9 +41,10 @@ export class LoginComponent implements OnInit {
   faGoogle = faGoogle;
   constructor(
     library: FaIconLibrary,
-    private authservice: AuthService,
+    private authService: AuthService,
     private googleSignIn: GoogleSigninService,
-    private router: Router
+    private router: Router,
+    private socialAuthService: SocialAuthService
   ) {}
 
   delay(ms: number) {
@@ -52,28 +58,24 @@ export class LoginComponent implements OnInit {
   //   this.router.navigate(['dashboard']);
   // }
 
-  decodeJWTToken(token: any) {
-    return JSON.parse(atob(token.split('.')[1]));
-  }
-
   ngOnInit(): void {
-    (globalThis as any).handleOauthResponse = (response: any) => {
-      const responsePayload = this.decodeJWTToken(response.credential);
-      console.log(responsePayload);
-      sessionStorage.setItem('loggedinUser', JSON.stringify(responsePayload));
-      console.log('pls show I beg');
-    };
+    this.socialAuthService.authState.subscribe((user) => {
+      console.log(user);
+      if (user.idToken) {
+        sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+        this.login();
+        this.router.navigate(['dashboard']);
+      }
+    });
+    // if ()
   }
 
   toggleAuth() {
-    return this.authservice.toggleAuthentication();
+    return this.authService.toggleAuthentication();
   }
 
   login() {
-    if (this.authservice.isAuthenticated() === true) {
-      return;
-    }
-    this.authservice.login();
+    this.authService.login();
   }
 
   // async signInWithGoogle(): Promise<void> {

@@ -30,7 +30,7 @@ import { GoogleSigninService } from '../core/services/google-signin.service';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;
   faGoogle = faGoogle;
@@ -44,12 +44,25 @@ export class LoginComponent {
   delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-  // async ngOnInit(): Promise<void> {
-  //   console.warn('See this first');
-  //   this.delay(5000);
-  //   await this.googleSignIn.initGoogleSignIn();
-  //   console.warn('This must also be seen');
+
+  decodeJWTToken(token: any) {
+    return JSON.parse(atob(token.split('.')[1]));
+  }
+  // handleOauthResponse(response: any) {
+  //   const responsePayload = this.decodeJWTToken(response.credential);
+  //   console.log(responsePayload);
+  //   sessionStorage.setItem('loggedinUser', JSON.stringify(responsePayload));
+  //   this.router.navigate(['dashboard']);
   // }
+
+  ngOnInit() {
+    (globalThis as any).handleOauthResponse = (response: any) => {
+      const responsePayload = this.decodeJWTToken(response.credential);
+      console.log(responsePayload);
+      sessionStorage.setItem('loggedinUser', JSON.stringify(responsePayload));
+      this.router.navigate(['dashboard']);
+    };
+  }
 
   toggleAuth() {
     return this.authservice.toggleAuthentication();
@@ -62,21 +75,21 @@ export class LoginComponent {
     this.authservice.login();
   }
 
-  async signInWithGoogle(): Promise<void> {
-    try {
-      const user = await this.googleSignIn.signIn();
-      console.log('Successful google login from' + user);
-      if (user) {
-        this.login();
-        this.router.navigate(['dashboard']);
-      }
-    } catch (error) {
-      console.error('Google login FAILED 404 WEWOOWEWOOOOO', error);
-    }
-  }
+  // async signInWithGoogle(): Promise<void> {
+  //   try {
+  //     const user = await this.googleSignIn.signIn();
+  //     console.log('Successful google login from' + user);
+  //     if (user) {
+  //       this.login();
+  //       this.router.navigate(['dashboard']);
+  //     }
+  //   } catch (error) {
+  //     console.error('Google login FAILED 404 WEWOOWEWOOOOO', error);
+  //   }
+  // }
 
-  async googleSignOut(): Promise<void> {
-    await this.googleSignIn.signOut();
-    this.router.navigate(['login']);
-  }
+  // async googleSignOut(): Promise<void> {
+  //   await this.googleSignIn.signOut();
+  //   this.router.navigate(['login']);
+  // }
 }

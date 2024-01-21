@@ -114,8 +114,7 @@ $border-radius: 20px;
     border: none;
   }
 
-  .login-btn:hover,
-  .google-btn:hover {
+  .login-btn:hover {
     background-color: #4aa3df;
   }
 
@@ -127,21 +126,26 @@ $border-radius: 20px;
 
   .google-btn {
     // margin: 65px;
-    width: 270px;
-    font-size: 14px;
-    font-family: "Open Sans", sans-serif;
-    font-weight: bold;
-    padding: 12px 0;
+    // width: 270px;
+    // font-size: 14px;
+    // font-family: "Open Sans", sans-serif;
+    // font-weight: bold;
+    // padding: 12px 0;
 
-    color: #000000;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    border-left: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+    // color: #000000;
+    // background: rgba(255, 255, 255, 0.05);
+    // backdrop-filter: blur(10px);
+    // border-top: 1px solid rgba(255, 255, 255, 0.2);
+    // border-left: 1px solid rgba(255, 255, 255, 0.2);
+    // box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
 
-    border-radius: $border-radius;
-    border: none;
+    // border-radius: $border-radius;
+    // border: none;
+
+    height: auto;
+    width: auto;
+    display: flex;
+    justify-content: center;
   }
 
   .form input[type="submit"] {
@@ -183,7 +187,7 @@ $border-radius: 20px;
 
   .sign-up-text {
     display: flex;
-    padding-top: 5vh;
+    padding-top: 2vh;
     justify-content: center;
     font-style: italic;
   }

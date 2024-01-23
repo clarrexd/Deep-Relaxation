@@ -26,7 +26,12 @@ export const routes: Routes = [
     canActivate: [() => inject(AuthService).loginGuard()],
   },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },
-  { path: 'dashboard', component: UserDashboardComponent },
+  {
+    path: 'dashboard',
+    component: UserDashboardComponent,
+    title: 'My dashboard',
+    canActivate: [() => inject(AuthService).dashboardGuard()],
+  },
   { path: 'cart', component: CartComponent },
   { path: '**', redirectTo: 'home' },
   { path: '', component: HomeComponent },

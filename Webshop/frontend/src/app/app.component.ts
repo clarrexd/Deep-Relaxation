@@ -50,6 +50,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartservice.cartList = this.localstorage.getItemCart();
-    this.authService.isAuthenticated();
+    // this.authService.isAuthenticated();
   }
 }

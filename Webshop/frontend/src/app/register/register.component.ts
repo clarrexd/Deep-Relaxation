@@ -41,6 +41,10 @@ export class RegisterComponent implements OnInit {
       });
   }
 
+  test() {
+    //test function for commit
+  }
+
   ngOnInit(): void {
     // console.log(this.registerUser('clarre', 'hehe', 'aa@okej'));
   }

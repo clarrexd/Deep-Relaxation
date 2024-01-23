@@ -5,58 +5,29 @@
   >
     <div class="login-container">
       <h1>Login</h1>
-      <form class="form" method="post" action="#">
-        <p class="field">
-          <input type="text" name="login" placeholder="Username" required />
-          <fa-icon [icon]="faUser"></fa-icon>
-        </p>
+      <form [formGroup]="loginForm" (ngSubmit)="submitUserLogin()" class="form">
+        <label for="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="field"
+        />
 
-        <p class="field">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
-          <fa-icon [icon]="faLock"></fa-icon>
-        </p>
-        <button class="login-btn" type="submit" (click)="login()">LOGIN</button>
+        <label for="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="field"
+        />
+
+        <button type="submit">Login</button>
       </form>
+
       <div class="or-container">
         <p class="or">OR</p>
       </div>
-      <!-- <div class="flex-center-items" style="margin-top: 2vh">
-        <button class="google-btn">
-          <fa-icon
-            [icon]="faGoogle"
-            style="position: absolute; left: 10px; top: 10px; font-size: 20px"
-          ></fa-icon>
-          LOG IN WITH GOOGLE
-        </button>
-      </div> -->
-
-      <!-- <section class="google-btn">
-        <div
-          id="g_id_onload"
-          data-client_id="1056239443682-ohm81qmjcte88unluf6e8u5ehb3pbdv3.apps.googleusercontent.com"
-          data-context="signin"
-          data-ux_mode="redirect"
-          data-login_uri="http://localhost:8000/redirect-login"
-          data-callback="handleOauthResponse"
-          data-itp_support="true"
-        ></div>
-
-        <div
-          class="g_id_signin"
-          data-type="standard"
-          data-shape="pill"
-          data-theme="outline"
-          data-text="signin_with"
-          data-size="large"
-          data-locale="en"
-          data-logo_alignment="left"
-        ></div>
-      </section> -->
 
       <asl-google-signin-button type="standard" size="large">
       </asl-google-signin-button>

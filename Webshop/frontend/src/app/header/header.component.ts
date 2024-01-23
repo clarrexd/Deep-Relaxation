@@ -37,6 +37,7 @@ export class HeaderComponent {
   logoutFromHeader() {
     if (this.checkAuthentication() === true) {
       this.authservice.logout();
+      sessionStorage.clear();
     }
   }
 

@@ -8,7 +8,7 @@ from datetime import datetime
 
 from pymysql import IntegrityError
 import database
-from models import User
+from models import AuthenticateUser, RegisterUser
 import asyncio
 
 db=database.Database()
@@ -52,9 +52,21 @@ async def findLatestRegisteredUser(user_id: int):
 
 
 
+@app.post('/authenticate-user')
+async def authenticateUser(user:AuthenticateUser):
+    """Endpoint for authenticating users when logging in."""
+    try:
+        result = await db.authenticateUser(user.username, user.password)
+        if result:
+            return result
+        else:
+            raise HTTPException(status_code=401, detail="Login failed")
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
+
 
 @app.post('/register-user')
-async def registerUser(user:User):
+async def registerUser(user:RegisterUser):
     """Endpoint for registering users to the database. Will return a list of all users registered"""
     try:
         result = await db.insertUser(user)

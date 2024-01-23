@@ -20,6 +20,13 @@ import {
   SocialAuthService,
   GoogleSigninButtonModule,
 } from '@abacritt/angularx-social-login';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +38,8 @@ import {
     RouterLinkActive,
     CommonModule,
     GoogleSigninButtonModule,
+    HttpClientModule,
+    ReactiveFormsModule,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -39,24 +48,21 @@ export class LoginComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;
   faGoogle = faGoogle;
+  loginForm!: FormGroup;
+
   constructor(
     library: FaIconLibrary,
     private authService: AuthService,
     private googleSignIn: GoogleSigninService,
     private router: Router,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private formBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
 
   delay(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
-
-  // handleOauthResponse(response: any) {
-  //   const responsePayload = this.decodeJWTToken(response.credential);
-  //   console.log(responsePayload);
-  //   sessionStorage.setItem('loggedinUser', JSON.stringify(responsePayload));
-  //   this.router.navigate(['dashboard']);
-  // }
 
   ngOnInit(): void {
     this.socialAuthService.authState.subscribe((user) => {
@@ -67,7 +73,35 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
       }
     });
-    // if ()
+
+    this.loginForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+    });
+  }
+
+  submitUserLogin() {
+    if (this.loginForm.valid) {
+      const formData = this.loginForm.value;
+      this.authenticateUser(formData);
+    }
+  }
+
+  authenticateUser(formData: any) {
+    this.http
+      .post('http://localhost:8000/authenticate-user', formData)
+      .subscribe((response: any) => {
+        if (response) {
+          console.log(response);
+          this.login();
+          sessionStorage.setItem('loggedInUser', JSON.stringify(response));
+          this.router.navigate(['dashboard']);
+          return true;
+        } else {
+          alert('Incorrect login details. Please try again.');
+          return false;
+        }
+      });
   }
 
   toggleAuth() {
@@ -77,22 +111,4 @@ export class LoginComponent implements OnInit {
   login() {
     this.authService.login();
   }
-
-  // async signInWithGoogle(): Promise<void> {
-  //   try {
-  //     const user = await this.googleSignIn.signIn();
-  //     console.log('Successful google login from' + user);
-  //     if (user) {
-  //       this.login();
-  //       this.router.navigate(['dashboard']);
-  //     }
-  //   } catch (error) {
-  //     console.error('Google login FAILED 404 WEWOOWEWOOOOO', error);
-  //   }
-  // }
-
-  // async googleSignOut(): Promise<void> {
-  //   await this.googleSignIn.signOut();
-  //   this.router.navigate(['login']);
-  // }
 }

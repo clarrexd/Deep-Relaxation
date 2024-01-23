@@ -1,7 +1,7 @@
 from aiomysql import Cursor
 import aiomysql.sa
 import bcrypt
-from models import User
+from models import RegisterUser, AuthenticateUser
   
 
 
@@ -28,7 +28,7 @@ class Database:
     
 
 
-    async def insertUser(self, user:User):
+    async def insertUser(self, user:RegisterUser):
         await self.connectToDatabase()
         cur: Cursor = await self.conn.cursor(aiomysql.DictCursor)
         hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
@@ -41,5 +41,27 @@ class Database:
         await cur.close()
         self.conn.close()
         return result
+    
+
+    async def authenticateUser(self, username: str, password: str):
+        await self.connectToDatabase()
+        cur = await self.conn.cursor(aiomysql.DictCursor)
+
+        # Retrieve stored hashed password and salt for the given username
+        query = "SELECT username,password, email FROM users WHERE username = %s"
+        await cur.execute(query, [username])
+        user_data = await cur.fetchone()
+
+        if user_data:
+            stored_hashed_password = user_data["password"]
+
+            # Check if the entered password matches the stored hashed password
+            if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
+                del user_data['password']
+                return user_data
+            else:
+                return False
+        else:
+            return False
 
 

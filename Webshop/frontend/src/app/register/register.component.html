@@ -17,6 +17,9 @@
           id="username"
           formControlName="username"
         />
+        <div *ngIf="registerForm.get('username')?.hasError('invalidUsername')">
+          Username is already taken.
+        </div>
 
         <label for="password">Password:</label>
         <input

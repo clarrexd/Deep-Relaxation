@@ -1,5 +1,6 @@
 from aiomysql import Cursor
 import aiomysql.sa
+import bcrypt
 from models import User
   
 
@@ -30,9 +31,10 @@ class Database:
     async def insertUser(self, user:User):
         await self.connectToDatabase()
         cur: Cursor = await self.conn.cursor(aiomysql.DictCursor)
+        hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
         query = "INSERT INTO users (username, password, email) VALUES (%s, %s, %s)"
-        await cur.execute(query, [user.username, user.password, user.email])
-        await self.conn.commit() #Very important row
+        await cur.execute(query, [user.username, hashed_password, user.email])
+        await self.conn.commit() #Very important row. Commit changes to database
         await cur.execute('SELECT id FROM users WHERE username = %s', [user.username])
         result=await cur.fetchone()
         # result=cur.rowcount

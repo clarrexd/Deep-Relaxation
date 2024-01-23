@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import {
   FaIconLibrary,
   FontAwesomeModule,
@@ -38,7 +43,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     library: FaIconLibrary,
     private http: HttpClient,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router
   ) {}
 
   faUser = faUser;
@@ -59,6 +65,7 @@ export class RegisterComponent implements OnInit {
           console.log(response);
           alert('Your account has been successfully created!');
           this.registerForm.reset();
+          this.router.navigate(['/login']);
         }
       });
   }

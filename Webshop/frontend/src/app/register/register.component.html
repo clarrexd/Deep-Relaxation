@@ -31,7 +31,9 @@
 
         <label for="email">Email:</label>
         <input class="field" type="email" id="email" formControlName="email" />
-
+        <div *ngIf="registerForm.get('email')?.hasError('invalidEmail')">
+          Invalid email.
+        </div>
         <button type="submit">Submit</button>
       </form>
     </div>
@@ -39,3 +41,5 @@
 </div>
 
 <!-- <fa-icon [icon]="faUser"></fa-icon> -->
+<!-- <fa-icon [icon]="faLock"></fa-icon> -->
+<!-- <fa-icon [icon]="faEnvelope"></fa-icon> -->

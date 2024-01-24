@@ -7,6 +7,7 @@ import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { MatIconModule } from '@angular/material/icon';
 import { CartService } from '../core/services/cart.service';
 import { LocalstorageService } from '../core/services/localstorage.service';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-header',
@@ -27,21 +28,15 @@ export class HeaderComponent {
   constructor(
     private authservice: AuthService,
     private cartservice: CartService,
-    private localstorage: LocalstorageService
+    private localstorage: LocalstorageService,
+    private socialAuthService: SocialAuthService
   ) {}
 
-  checkAuthentication() {
-    return this.authservice.checkAuthentication();
+  isAuthenticated() {
+    return this.authservice.isAuthenticated();
   }
 
   logoutFromHeader() {
-    if (this.checkAuthentication() === true) {
-      this.authservice.logout();
-      sessionStorage.clear();
-    }
-  }
-
-  convertCartToLS() {
-    this.localstorage.setItemCart(this.cartservice.cartList);
+    this.authservice.logout();
   }
 }

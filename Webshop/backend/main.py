@@ -13,7 +13,7 @@ import asyncio
 
 db=database.Database()
 
-# datetime.utcnow()
+
 app = FastAPI()
 
 #Enabling CORS

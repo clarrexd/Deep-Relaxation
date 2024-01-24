@@ -1,1 +1,15 @@
-<p>user-dashboard works!</p>
+<section class="full-width height" style="display: grid; place-items: center">
+  <div class="dashboard-container">
+    <div>
+      <h4>
+        Username: {{ this.userInfoFromSS.username || this.userInfoFromSS.name }}
+      </h4>
+    </div>
+    <br />
+    <h4>Email: {{ this.userInfoFromSS.email }}</h4>
+  </div>
+  <h2>My orders</h2>
+  <div class="orders">
+    {{ this.userInfoFromSS.orders }}
+  </div>
+</section>

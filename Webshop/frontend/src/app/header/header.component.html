@@ -41,7 +41,6 @@
     routerLink="cart"
     routerLinkActive="active"
     ariaCurrentWhenActive="page"
-    (click)="convertCartToLS()"
     class="justify-end"
     style="flex-grow: 1"
   >
@@ -61,7 +60,7 @@
         class="LoginComponent"
         (click)="logoutFromHeader()"
       >
-        {{ checkAuthentication() ? "Logout" : "Login" }}
+        {{ isAuthenticated() ? "Logout" : "Login" }}
       </div>
     </a>
   </div>

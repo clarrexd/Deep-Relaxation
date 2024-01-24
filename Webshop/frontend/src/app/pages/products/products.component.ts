@@ -56,7 +56,15 @@ export class ProductsComponent implements OnInit {
     }
 
     this.cartservice.cartList = fetchedItems;
-    this.cartservice.cartList.push(item);
+    let checkIfExists = this.cartservice.cartList.find(
+      (object: any) => object.id === item.id
+    );
+    if (checkIfExists) {
+      checkIfExists.quantity =
+        parseInt(checkIfExists.quantity) + parseInt(item.quantity);
+    } else {
+      this.cartservice.cartList.push(item);
+    }
     this.localstorage.setItemCart(this.cartservice.cartList);
   }
 

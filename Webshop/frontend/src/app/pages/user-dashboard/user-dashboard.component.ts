@@ -8,6 +8,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './user-dashboard.component.html',
   styleUrl: './user-dashboard.component.scss',
 })
-export class UserDashboardComponent {
+export class UserDashboardComponent implements OnInit {
   constructor() {}
+
+  userInfoFromSS: any = [];
+
+  ngOnInit(): void {
+    this.userInfoFromSS = JSON.parse(
+      sessionStorage.getItem('loggedInUser') as string
+    );
+  }
 }

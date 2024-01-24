@@ -19,6 +19,7 @@ import { GoogleSigninService } from '../core/services/google-signin.service';
 import {
   SocialAuthService,
   GoogleSigninButtonModule,
+  SocialUser,
 } from '@abacritt/angularx-social-login';
 import {
   FormBuilder,
@@ -27,6 +28,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -65,14 +67,15 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.socialAuthService.authState.subscribe((user) => {
-      console.log(user);
-      if (user.idToken) {
-        sessionStorage.setItem('loggedInUser', JSON.stringify(user));
-        this.login();
-        this.router.navigate(['dashboard']);
-      }
-    });
+    this.authService.googleAuthSubscription =
+      this.socialAuthService.authState.subscribe((user) => {
+        console.log(user);
+        if (user.idToken) {
+          sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+          this.login();
+          this.router.navigate(['dashboard']);
+        }
+      });
 
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],

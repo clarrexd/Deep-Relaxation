@@ -1,5 +1,7 @@
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +9,12 @@ import { Router } from '@angular/router';
 export class AuthService {
   private isLoggedIn: boolean = false;
 
-  constructor(private router: Router) {}
+  googleAuthSubscription: Subscription | undefined;
+
+  constructor(
+    private router: Router,
+    private socialAuthService: SocialAuthService
+  ) {}
 
   login(): void {
     this.isLoggedIn = true;
@@ -15,10 +22,17 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isLoggedIn = false;
+    if (this.isAuthenticated() === true) {
+      sessionStorage.clear();
+      if (this.googleAuthSubscription) {
+        this.googleAuthSubscription.unsubscribe();
+      }
+      this.socialAuthService.signOut();
+    }
+
     alert('You have successfully logged out.');
-    sessionStorage.clear();
-    //Maybe change to a modal?
+
+    this.isLoggedIn = false;
   }
 
   isAuthenticated(): boolean {
@@ -34,17 +48,6 @@ export class AuthService {
     } else {
       this.login();
     }
-  }
-
-  checkAuthentication(): boolean {
-    const isAuthenticated = this.isAuthenticated();
-
-    if (isAuthenticated) {
-      console.log('Login successful');
-    } else {
-      console.log('Login attempt failed');
-    }
-    return isAuthenticated;
   }
 
   loginGuard(): void {

@@ -70,8 +70,10 @@ export class LoginComponent implements OnInit {
     this.authService.googleAuthSubscription =
       this.socialAuthService.authState.subscribe((user) => {
         console.log(user);
+
         if (user.idToken) {
           sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+
           this.login();
           this.router.navigate(['dashboard']);
         }

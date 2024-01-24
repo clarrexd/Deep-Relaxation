@@ -1,7 +1,7 @@
 from aiomysql import Cursor
 import aiomysql.sa
 import bcrypt
-from models import RegisterUser, AuthenticateUser
+from models import CreateOrder, RegisterUser
   
 
 
@@ -42,6 +42,17 @@ class Database:
         self.conn.close()
         return result
     
+    async def insertUserFromGoogle(self, email:str):
+        await self.connectToDatabase()
+        cur: Cursor = await self.conn.cursor(aiomysql.DictCursor)
+        query = "INSERT INTO users (email) VALUES (%s)"
+        await cur.execute(query, [email])
+        await self.conn.commit() #Very important row. Commit changes to database
+        result=cur.rowcount
+        await cur.close()
+        self.conn.close()
+        return result
+    
 
     async def authenticateUser(self, username: str, password: str):
         await self.connectToDatabase()
@@ -65,3 +76,6 @@ class Database:
             return False
 
 
+    async def createOrder(cartList:CreateOrder):
+        for product in cartList:
+            query = f"INSERT INTO orders (placed_by) VALUES ({cartList.email})"

@@ -8,7 +8,7 @@ from datetime import datetime
 
 from pymysql import IntegrityError
 import database
-from models import AuthenticateUser, RegisterUser
+from models import AuthenticateUser, CreateOrder, GoogleUser, RegisterUser
 import asyncio
 
 db=database.Database()
@@ -74,6 +74,27 @@ async def registerUser(user:RegisterUser):
     except Exception as err:
         raise HTTPException(status_code=500, detail=str(err))
         
+
+@app.post('/register-googleuser')
+async def registerGoogleUser(email:GoogleUser):
+    """Endpoint for creating a user in the users table for a google user, so the email column remains unique"""
+    try:
+        result=await db.insertUserFromGoogle(email.email)
+        return result
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
+
+# @app.post('/create-order')
+# async def createOrder(cartList: CreateOrder):
+#     """Endpoint for creating orders from cartpage"""
+#     try:
+#         query = 
+
+
+    # except Exception as err:
+    #     raise HTTPException(status_code=500, detail=str(err))
+
+
 
 
 

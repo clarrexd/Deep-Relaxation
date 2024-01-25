@@ -12,6 +12,7 @@ import { CartComponent } from './pages/cart/cart.component';
 import { ProductDetailsComponent } from './pages/product-details/product-details.component';
 import { inject } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
+import { CheckoutComponent } from './pages/checkout/checkout.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -33,6 +34,7 @@ export const routes: Routes = [
     canActivate: [() => inject(AuthService).dashboardGuard()],
   },
   { path: 'cart', component: CartComponent },
+  { path: 'checkout', component: CheckoutComponent },
   { path: '**', redirectTo: 'home' },
   { path: '', component: HomeComponent },
 ];

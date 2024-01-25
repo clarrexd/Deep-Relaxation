@@ -19,26 +19,21 @@ export class CartComponent implements OnInit {
   ) {}
 
   lsItems: Array<any> = [];
-  totalSum: any = 0;
-  placedByUser: string | undefined;
-  user: any = [];
-
-  getUsername() {
-    this.user = sessionStorage.getItem('loggedInUser');
-  }
+  totalSum: number = 0;
+  user: any;
 
   purchaseOrder() {
+    this.user = JSON.parse(sessionStorage.getItem('loggedInUser') as string);
     this.http
       .post('http://localhost:8000/create-order', {
         items: this.lsItems,
         email: this.user.email,
+        totalSum: this.totalSum,
       })
       .subscribe((response) => {
-        if (response) {
-          console.log(response);
-          localStorage.clear();
-          this.router.navigate(['/checkout']);
-        }
+        console.log(response);
+        localStorage.clear();
+        this.router.navigate(['/checkout']);
       });
   }
 

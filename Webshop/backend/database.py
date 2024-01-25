@@ -76,6 +76,48 @@ class Database:
             return False
 
 
-    async def createOrder(cartList:CreateOrder):
-        for product in cartList:
-            query = f"INSERT INTO orders (placed_by) VALUES ({cartList.email})"
+    async def insertOrder(self, cartList:CreateOrder):
+        await self.connectToDatabase()
+        cur:Cursor = await self.conn.cursor(aiomysql.DictCursor)
+        query = "SELECT id FROM users WHERE email=%s"
+        await cur.execute(query, [cartList.email])
+        row = await cur.fetchone()
+        user_id = row["id"]
+            
+
+        query = "INSERT INTO orders (placed_by, status, total_sum) VALUES (%s, %s, %s)"
+        # print(isinstance(user_id, int))
+        # print(isinstance(cartList.totalSum, int))
+        result = await cur.execute(query, [user_id,'Created', cartList.totalSum])
+        
+        if (result != 1):
+            await self.conn.rollback()
+            raise Exception("Something went wrong, the order could not be placed. Please try again")
+        
+        await self.conn.commit()
+
+        query = f"SELECT id FROM orders WHERE placed_by={user_id} ORDER BY created_at DESC"
+        await cur.execute(query)
+        row = await cur.fetchone()
+        order_id =row["id"]
+        
+        
+        for product in cartList.items:
+            query = "INSERT INTO orders_products (orders_id,products_id, quantity) VALUES (%s, %s, %s)"
+            result = await cur.execute(query, [order_id, product.id, product.quantity])
+
+            if (result != 1):
+                await self.conn.rollback()
+                raise Exception("Something went wrong, the order could not be placed. Please try again")
+            
+        await self.conn.commit()
+        return order_id    
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,16 @@
 from pydantic import BaseModel
 
+class Product(BaseModel):
+    id: int
+    name: str
+    price:str
+    size: str
+    color: str
+    quantity: int
+    description: str
+    imageURL: str | None = None
+
+
 class RegisterUser(BaseModel):
     username: str
     password:str
@@ -13,8 +24,9 @@ class AuthenticateUser(BaseModel):
     password:str
 
 class CreateOrder(BaseModel):
-    items: list
+    items: list[Product]
     email:str
+    totalSum: int
 
 class GoogleUser(BaseModel):
     email:str

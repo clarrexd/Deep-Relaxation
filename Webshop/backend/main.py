@@ -84,15 +84,18 @@ async def registerGoogleUser(email:GoogleUser):
     except Exception as err:
         raise HTTPException(status_code=500, detail=str(err))
 
-# @app.post('/create-order')
-# async def createOrder(cartList: CreateOrder):
-#     """Endpoint for creating orders from cartpage"""
-#     try:
-#         query = 
 
+@app.post('/create-order')
+async def createOrder(cartList: CreateOrder):
+    """Endpoint for creating orders from cartpage"""
+    try:
+        result = await db.insertOrder(cartList)
+        return result
 
-    # except Exception as err:
-    #     raise HTTPException(status_code=500, detail=str(err))
+    except Exception as err:
+        import traceback
+        print(traceback.format_exc())
+        raise HTTPException(status_code=500, detail=str(err))
 
 
 

@@ -36,7 +36,7 @@ class Orders extends OrdersTable
 
 
     //Function to update status column in orders table with new string value
-    public function updateStatus(int $id, string $status): void
+    public function updateStatus(int $id, ?string $status): void
     {
         $query = 'UPDATE ' . $this->tableName . ' SET status = :status WHERE id = :id';
 

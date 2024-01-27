@@ -20,6 +20,7 @@ try {
 
     if ($parts[0] == "warehouse") {
         $ID = null;
+        $status = null;
 
         switch($parts[1]) {
             case "orders":
@@ -42,7 +43,7 @@ try {
             }
         }
 
-        $controller->processRequest($ID);
+        $controller->processRequest($ID, $status);
         return;
     }
 

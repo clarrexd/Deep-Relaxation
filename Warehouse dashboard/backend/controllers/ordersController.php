@@ -64,7 +64,14 @@ class OrdersController
                 break;
             case 'PATCH':
                 //Testing to see if it works, otherwise needs separate rows 27/1
-                $data = json_decode(file_get_contents("php://input")) && $this->orders->updateStatus($ID, $status);
+                //Works, variable has both values
+                $data = [
+                    'data' => json_decode(file_get_contents("php://input")),
+                    'statusUpdated' =>$this->orders->updateStatus($ID, $status)
+                ];
+                
+                
+ 
 
                 if ($ID == null) {
                     http_response_code(405);

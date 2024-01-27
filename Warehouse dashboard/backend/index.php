@@ -19,7 +19,7 @@ try {
     $parts = explode('/', $URI);
 
     if ($parts[0] == "warehouse") {
-        $ID = null;
+        $id = null;
         $status = null;
 
         switch($parts[1]) {
@@ -27,7 +27,7 @@ try {
                 $controller = new OrdersController();
                 break;
             case "inventory":
-                //$controller = new InventoryController();
+                $controller = new InventoryController();
                 break;
             default:
                 throw new Exception("Invalid path");
@@ -35,7 +35,7 @@ try {
 
         if(count($parts) > 2){
             if (is_numeric($parts[2])) {
-                $ID = (int) $parts[2];
+                $id = (int) $parts[2];
             } else {
                 http_response_code(404);
                 echo json_encode(['message' => 'Invalid path input. Please provide a number corresponding to a specific ID.']);
@@ -43,7 +43,7 @@ try {
             }
         }
 
-        $controller->processRequest($ID, $status);
+        $controller->processRequest($id, $status);
         return;
     }
 

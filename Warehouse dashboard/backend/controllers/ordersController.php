@@ -88,6 +88,8 @@ class OrdersController
                 return;
             }
 
+            echo json_encode((['message' => 'Status updated successfully.']));
+
             break;
             default:
                 http_response_code(405);

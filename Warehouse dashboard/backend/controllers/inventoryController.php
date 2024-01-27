@@ -33,17 +33,13 @@ class InventoryController
         return $errors;
     }
 
-    // public function getInventory():array {
-    //     //Query to select info from products table and JOIN stock_balance from products_stock. See functions in Tables.php for reference
-    //     $query = 
-    // }
 
     public function processRequest(?int $ID = null): void
     {
         $method = $_SERVER['REQUEST_METHOD'];
         switch ($method) {
             case 'GET':
-                $data = $this->inventory->getData($ID);
+                $data = $this->inventory->getInventoryData($ID);
                 echo json_encode($data);
                 break;
             case 'PATCH':

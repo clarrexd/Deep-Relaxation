@@ -12,26 +12,7 @@ class InventoryController
         $this->inventory = new Inventory();
     }
 
-    public function sanitizeData(array $data): array {
-        $data['product_id'] = (int) filter_var($data['product_id'], FILTER_SANITIZE_NUMBER_INT);
-        $data['stock_balance'] = (int) filter_var($data['stock_balance'], FILTER_SANITIZE_NUMBER_INT);
 
-        return $data;
-    }
-
-    public function validateData(array $data): array {
-        $errors = [];
-
-        if (!isset($data['stock_balance'])) {
-            $errors[] = 'Stock balance is required';
-        }
-        
-        if (filter_var($data['stock_balance'], FILTER_VALIDATE_INT) === false) {
-            $errors[] = 'Stock balance must be a number';
-        }
-
-        return $errors;
-    }
 
 
     public function processRequest(?int $ID = null): void
@@ -43,25 +24,22 @@ class InventoryController
                 echo json_encode($data);
                 break;
             case 'PATCH':
-                $data = json_decode(file_get_contents("php://input"), true);
-                $data = $this->sanitizeData($data);
-                $errors = $this->validateData($data);
-                
+            $data = json_decode(file_get_contents("php://input"), true);
 
-                if (count($errors) > 0) {
-                    http_response_code(405);
-                    echo json_encode(['message' => 'An error has occurred when changing stock balance', 'errors' => $errors]);
-                    return;
-                }
+            // This makes sure both 'id' and 'stock_balance' are provided in the request body
+            if (isset($data['id']) && isset($data['stock_balance'])) {
+                $id = (int)$data['id'];
+                $stock_balance = (int)$data['stock_balance'];
 
-                $this->inventory->stock_balance = $data['stock_balance'];
+                // Update the stock balance using the method from Inventory class
+                $this->inventory->updateStockBalance($id, $stock_balance);
 
-
-                $this->inventory->patch();
                 echo json_encode(['message' => 'Stock balance updated successfully']);
-
-                
-                break;
+            } else {
+                http_response_code(400);
+                echo json_encode(['message' => 'Invalid request body. Both "id" and "stock_balance" are required.']);
+            }
+            break;
             default:
                 http_response_code(405);
                 echo json_encode(['message' => 'Method not allowed']);

@@ -14,8 +14,9 @@ CREATE TABLE IF NOT EXISTS`products` (
  
 );
 
-CREATE TABLE IF NOT EXISTS `products_stock`(
-`product_id`integer PRIMARY KEY NOT NULL,
+CREATE TABLE IF NOT EXISTS `inventory`(
+`id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT,
+`product_id`integer NOT NULL,
 `stock_balance` integer
 );
 
@@ -38,13 +39,13 @@ CREATE TABLE IF NOT EXISTS `orders` (
 );
 
 #ALTER TABLE `orders` ADD FOREIGN KEY (`id`) REFERENCES `users` (`id`);
-#ALTER TABLE `orders` ADD FOREIGN KEY (`placed_by`) REFERENCES `users` (`id`);
 
+#ALTER TABLE products_stock RENAME TO inventory;
 #ALTER TABLE `orders` DROP FOREIGN KEY `orders_ibfk_1`;
-ALTER TABLE orders ADD COLUMN total_sum integer;
+#ALTER TABLE orders ADD COLUMN total_sum integer;
 
 #ALTER TABLE users MODIFY email;
-ALTER TABLE users ADD CONSTRAINT UNIQUE(email);
+#ALTER TABLE users ADD CONSTRAINT UNIQUE(email);
 
 CREATE TABLE IF NOT EXISTS `orders_products` (
    `id` integer PRIMARY KEY NOT NULL AUTO_INCREMENT ,
@@ -57,6 +58,9 @@ ALTER TABLE `orders_products` ADD FOREIGN KEY (`orders_id`) REFERENCES `orders` 
 
 ALTER TABLE `orders_products` ADD FOREIGN KEY (`products_id`) REFERENCES `products` (`id`);
 
+ALTER TABLE `inventory` ADD FOREIGN KEY (`product_id`) REFERENCES `products` (`id`);
+
+#Note: id in inventory must correspond to product_id
 #ALTER TABLE `users` ADD UNIQUE (username);
 #DROP TABLE orders_products;
 #UPDATE products SET price = 299 WHERE id=2;
@@ -64,5 +68,5 @@ ALTER TABLE `orders_products` ADD FOREIGN KEY (`products_id`) REFERENCES `produc
 #UPDATE products SET imageURL = "/assets/blue-morning-robe-azure.jpg" WHERE id=1;
 #INSERT INTO products (name,description,price,color, size, stock) VALUES ('Soft loafers', 'The most comfortable loafers that will ever grace your feet', '$299', 'Spitting green', 'L', 2);
 #INSERT INTO users (username, password, email) VALUES ("clarrexd", "hahalolxD123", "pungspark@plast.cn");
-#test
-#DELETE FROM users WHERE id=40;
+
+#DELETE FROM orders WHERE id=5;

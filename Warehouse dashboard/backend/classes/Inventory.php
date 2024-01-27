@@ -20,12 +20,13 @@ class InventoryList extends Tables
 
 class Inventory extends InventoryList
 {
-    public function patch(): void
+    public function updateStockBalance(int $id, int $stock_balance): void
     {
-        $query = 'UPDATE ' . $this->tableName . ' SET stock_balance = :stock_balance WHERE ' . $this->id . '=' . $this->product_id;
+        $query = 'UPDATE ' . $this->tableName . ' SET stock_balance = :stock_balance WHERE product_id = :id';
 
         $stmt = $this->connection->prepare($query);
-        $stmt->bindParam(':stock_balance', $this->stock_balance);
+        $stmt->bindParam(':stock_balance', $stock_balance);
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
 

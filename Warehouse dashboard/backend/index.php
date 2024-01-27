@@ -18,7 +18,7 @@ $URI = trim($URI, '/');
 try {
     $parts = explode('/', $URI);
 
-    if ($parts[0] == "wh") {
+    if ($parts[0] == "warehouse") {
         $ID = null;
 
         switch($parts[1]) {

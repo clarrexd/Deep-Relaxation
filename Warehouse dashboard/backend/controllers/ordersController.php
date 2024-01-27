@@ -54,7 +54,7 @@ class OrdersController
         return $errors;
     }
 
-    public function processRequest(?int $ID = null): void
+    public function processRequest(?int $ID = null, ?string $status = null): void
     {
         $method = $_SERVER['REQUEST_METHOD'];
         switch ($method) {
@@ -62,8 +62,9 @@ class OrdersController
                 $data = $this->orders->getData($ID);
                 echo json_encode($data);
                 break;
-            case 'PUT':
-                $data = json_decode(file_get_contents("php://input"));
+            case 'PATCH':
+                //Testing to see if it works, otherwise needs separate rows 27/1
+                $data = json_decode(file_get_contents("php://input")) && $this->orders->updateStatus($ID, $status);
 
                 if ($ID == null) {
                     http_response_code(405);

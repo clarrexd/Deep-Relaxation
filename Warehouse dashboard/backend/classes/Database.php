@@ -7,7 +7,7 @@ error_reporting(E_ALL);
 class Database
 {
     protected PDO $connection;
-    private const HOST = 'localhost:9000';
+    private const HOST = 'localhost';
     private const DB_NAME = 'Deep_Relaxation';
     private const USERNAME = 'root';
     private const PASSWORD = '';

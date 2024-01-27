@@ -54,7 +54,7 @@ class OrdersController
         return $errors;
     }
 
-    public function processRequest(?int $ID = null, ?string $status = null): void
+    public function processRequest(?int $ID = null): void
     {
         $method = $_SERVER['REQUEST_METHOD'];
         switch ($method) {
@@ -63,24 +63,32 @@ class OrdersController
                 echo json_encode($data);
                 break;
             case 'PATCH':
-                //Testing to see if it works, otherwise needs separate rows 27/1
-                //Works, variable has both values
-                $data = [
-                    'data' => json_decode(file_get_contents("php://input")),
-                    'statusUpdated' =>$this->orders->updateStatus($ID, $status)
-                ];
-                
-                
- 
 
-                if ($ID == null) {
-                    http_response_code(405);
-                    echo json_encode(['message' => 'Please input an ID.']);
-                    return;
-                }
+            $json_data = json_decode(file_get_contents("php://input"), true);
 
+            if ($json_data === null) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Invalid JSON data']);
+                return;
+            }
 
-                break;
+            // Use the properties from the JSON data
+            $id_from_json = isset($json_data['id']) ? (int)$json_data['id'] : null;
+            $status_from_json = isset($json_data['status']) ? $json_data['status'] : null;
+
+            // Update status using the retrieved properties
+            $data = [
+                'data' => $json_data,
+                'statusUpdated' => $this->orders->updateStatus($id_from_json, $status_from_json)
+            ];
+
+            if ($id_from_json === null) {
+                http_response_code(400);
+                echo json_encode(['message' => 'Please provide an "id" in the JSON data']);
+                return;
+            }
+
+            break;
             default:
                 http_response_code(405);
                 echo json_encode(['message' => 'Method not allowed']);

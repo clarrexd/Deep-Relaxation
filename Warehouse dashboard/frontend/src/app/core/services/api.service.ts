@@ -30,4 +30,12 @@ export class ApiService {
         this.ordersList = response;
       });
   }
+
+  getInventory() {
+    this.http
+      .get('http://localhost:9000/warehouse/inventory')
+      .subscribe((response) => {
+        this.inventoryList = response;
+      });
+  }
 }

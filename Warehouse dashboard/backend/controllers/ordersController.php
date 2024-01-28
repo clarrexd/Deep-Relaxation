@@ -54,12 +54,12 @@ class OrdersController
         return $errors;
     }
 
-    public function processRequest(?int $ID = null): void
+    public function processRequest(?int $id = null): void
     {
         $method = $_SERVER['REQUEST_METHOD'];
         switch ($method) {
             case 'GET':
-                $data = $this->orders->getData($ID);
+                $data = $this->orders->getData($id);
                 echo json_encode($data);
                 break;
             case 'PATCH':

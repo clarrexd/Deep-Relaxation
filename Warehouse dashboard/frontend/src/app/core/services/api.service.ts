@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ApiService {
-  id: any;
+  // id: any;
 
   constructor(private http: HttpClient) {}
 
   //Variable to hold all products in the inventory in an array
-  inventoryList: any;
+  // inventoryList: any;
 
   // getOrderDetail(id: any) {
   //   this.http

@@ -1,3 +1,9 @@
 <section class="dashboard-container">
-  <p>inventory works!</p>
+  <div class="dashboard-row" *ngFor="let product of inventoryList">
+    <span>ID: {{ product.id }}</span>
+    <span>Name: {{ product.name }}</span>
+    <span>Color: {{ product.color }}</span>
+    <span>Size: {{ product.size }}</span>
+    <span>In stock: {{ product.stock_balance }}</span>
+  </div>
 </section>

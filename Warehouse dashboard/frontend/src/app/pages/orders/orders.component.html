@@ -1,18 +1,24 @@
 <section class="dashboard-container" style="flex-direction: column">
-  <div class="order-container" *ngFor="let order of ordersList">
+  <div class="dashboard-row" *ngFor="let order of ordersList">
     <span>ID: {{ order.id }}</span>
     <span>Last update: {{ order.created_at }}</span>
 
-    <span>Customer: {{ order.placed_by }}</span>
-    <p>Status:</p>
-    <select>
-      <option value="" disabled selected>{{ order.status | uppercase }}</option>
-      <option value="CREATED">CREATED</option>
-      <option value="IN PROCESS">IN PROCESS</option>
-      <option value="SENT">SENT</option>
-    </select>
+    <span>Customer ID: {{ order.placed_by }}</span>
+
+    <span>
+      <p>Status:</p>
+
+      <select>
+        <option value="" disabled selected>
+          {{ order.status | uppercase }}
+        </option>
+        <option value="CREATED">CREATED</option>
+        <option value="IN PROCESS">IN PROCESS</option>
+        <option value="SENT">SENT</option>
+      </select>
+    </span>
   </div>
-  <div style="align-items: flex-end; position: relative">
+  <div class="btn-container">
     <button type="submit">SAVE CHANGES</button>
   </div>
 </section>

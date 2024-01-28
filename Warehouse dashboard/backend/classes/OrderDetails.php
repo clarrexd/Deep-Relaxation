@@ -5,13 +5,13 @@ error_reporting(E_ALL);
 
 require_once 'Database.php';
 
-class OrderDetailsList extends Database
+class OrderDetailsList extends Tables
 {
     protected string $tableName = 'orders_products';
 
     
 
-    protected function getAll(): array
+    public function getAllOrderDetails(): array
     {
         
         $query = 'SELECT op.orders_id, op.products_id, p.Name, p.color, p.size, op.quantity, o.status

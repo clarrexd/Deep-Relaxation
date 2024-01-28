@@ -29,6 +29,9 @@ try {
             case "inventory":
                 $controller = new InventoryController();
                 break;
+            case "order-details":
+                $controller = new OrderDetailsController();
+                break;
             default:
                 throw new Exception("Invalid path");
         }

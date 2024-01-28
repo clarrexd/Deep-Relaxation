@@ -17,10 +17,11 @@ class OrderDetailsController
         switch ($method) {
             case 'GET':
                 if ($orderId !== null) {
-                    // If an order ID is provided, get details for that specific order
+                    
                     $data = $this->orderDetails->getOrderDetailsById($orderId);
+                    echo json_encode($data);
                 } else {
-                    // If no order ID is provided, get all order details
+                    
                     $data = $this->orderDetails->getAllOrderDetails();
                 }
 

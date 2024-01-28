@@ -2,6 +2,8 @@
 declare(strict_types=1);
 require_once __DIR__ . '/controllers/inventoryController.php';
 require_once __DIR__ . '/controllers/ordersController.php';
+require_once __DIR__ . '/controllers/orderDetailsController.php';
+
 
 
 header('Content-Type: application/json');

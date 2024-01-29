@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 interface Order {
   id: number;
@@ -19,7 +20,7 @@ interface Order {
   styleUrl: './orders.component.scss',
 })
 export class OrdersComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   //Variable to hold all orders
   ordersList: Order[] = [];
@@ -51,6 +52,10 @@ export class OrdersComponent implements OnInit {
       ).value;
       this.updateOrderStatus(order, newStatus);
     });
+  }
+
+  goToOrderDetail(order: Order) {
+    this.router.navigate(['dashboard/orders', order.id]);
   }
 
   ngOnInit(): void {

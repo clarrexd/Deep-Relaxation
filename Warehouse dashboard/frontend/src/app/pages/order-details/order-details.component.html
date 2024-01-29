@@ -1,3 +1,13 @@
-<div class="dashboard-container">
-  <p>order-details works!</p>
-</div>
+<section class="dashboard-container">
+  <div *ngFor="let order of orderDetails">
+    <p>{{ order.orders_id }}</p>
+    <p>{{ order.products_id }}</p>
+    <p>{{ order.Name }}</p>
+    <p>{{ order.color }}</p>
+    <p>{{ order.size }}</p>
+    <p>{{ order.quantity }}</p>
+
+    <!-- Select menu as in order -->
+    <p>{{ order.status }}</p>
+  </div>
+</section>

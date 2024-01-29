@@ -5,6 +5,8 @@
 
     <span>Customer ID: {{ order.placed_by }}</span>
 
+    <span><button (click)="goToOrderDetail(order)">More details</button></span>
+
     <span>
       <label for="status-{{ order.id }}">Status: </label>
       <select id="status-{{ order.id }}">

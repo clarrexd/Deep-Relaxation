@@ -28,7 +28,7 @@ export const routes: Routes = [
     canActivate: [() => inject(AuthService).dashboardGuard()],
   },
   {
-    path: 'dashboard/order-details/:order_id',
+    path: 'dashboard/orders/:order_id',
     component: OrderDetailsComponent,
     title: 'Dashboard - Orders',
     canActivate: [() => inject(AuthService).dashboardGuard()],

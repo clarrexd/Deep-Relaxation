@@ -3,6 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+interface Order {
+  id: number;
+  created_at: string;
+  status: string;
+  placed_by: number;
+  totalSum: number;
+}
+
 @Component({
   selector: 'app-orders',
   standalone: true,
@@ -14,17 +22,38 @@ export class OrdersComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   //Variable to hold all orders
-  ordersList: any;
+  ordersList: Order[] = [];
 
   getAllOrders() {
     this.http
-      .get('http://localhost:9000/warehouse/orders')
+      .get<Order[]>('http://localhost:9000/warehouse/orders')
       .subscribe((response) => {
         this.ordersList = response;
       });
   }
 
+  updateOrderStatus(order: Order, newStatus: string): void {
+    this.http
+      .patch('http://localhost:9000/warehouse/orders', {
+        id: order.id,
+        status: newStatus,
+      })
+      .subscribe((response) => {
+        alert('Status changes updated successfully');
+      });
+  }
+
+  updateStatusChanges(): void {
+    //Loop to update all statuses to their selected value
+    this.ordersList.forEach((order) => {
+      const newStatus = (
+        document.getElementById(`status-${order.id}`) as HTMLSelectElement
+      ).value;
+      this.updateOrderStatus(order, newStatus);
+    });
+  }
+
   ngOnInit(): void {
-    this.ordersList = this.getAllOrders();
+    this.getAllOrders();
   }
 }

@@ -6,9 +6,8 @@
     <span>Customer ID: {{ order.placed_by }}</span>
 
     <span>
-      <p>Status:</p>
-
-      <select>
+      <label for="status-{{ order.id }}">Status: </label>
+      <select id="status-{{ order.id }}">
         <option value="" disabled selected>
           {{ order.status | uppercase }}
         </option>
@@ -19,6 +18,6 @@
     </span>
   </div>
   <div class="btn-container">
-    <button type="submit">SAVE CHANGES</button>
+    <button type="submit" (click)="updateStatusChanges()">SAVE CHANGES</button>
   </div>
 </section>

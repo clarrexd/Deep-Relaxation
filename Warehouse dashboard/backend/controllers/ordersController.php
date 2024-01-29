@@ -12,47 +12,7 @@ class OrdersController
         $this->orders = new Orders();
     }
 
-    public function sanitizeData(array $data): array {
-        $data['status'] = filter_var($data['status'], FILTER_SANITIZE_SPECIAL_CHARS);
-        $data['placed_by'] = (int) filter_var($data['placed_by'], FILTER_SANITIZE_NUMBER_INT);
-        $data["totalSum"] = (int) filter_var($data['totalSum'], FILTER_SANITIZE_NUMBER_INT);
-        
 
-
-        return $data;
-    }
-
-    public function validateData(array $data): array {
-        $errors = [];
-
-        if (!isset($data['status']) || strlen($data['status']) < 1) {
-            $errors[] = 'Status is required';
-        }
-
-        if (filter_var($data['status'], FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^[a-zåäö A-ZÅÄÖ]*$/']]) === false) {
-            $errors[] = 'Status can only contain letters and spaces';
-        }
-
-        // if (!isset($data['placed_by'])) {
-        //     $errors[] = 'placed_by is required';
-        // }
-
-        if (filter_var($data['placed_by'], FILTER_VALIDATE_INT) === false) {
-            $errors[] = 'placed_by must be a number';
-        }
-
-        // if (!isset($data['totalSum'])) {
-        //     $errors[] = 'Total sum is required';
-        // }
-
-        if (filter_var($data['totalSum'], FILTER_VALIDATE_INT) === false) {
-            $errors[] = 'Total sum must be a number';
-        }
-
-
-        
-        return $errors;
-    }
 
     public function processRequest(?int $id = null): void
     {

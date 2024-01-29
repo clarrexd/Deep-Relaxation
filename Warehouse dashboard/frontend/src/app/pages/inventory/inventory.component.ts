@@ -14,7 +14,7 @@ export class InventoryComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
-  getInventory() {
+  fetchInventory() {
     this.http
       .get('http://localhost:9000/warehouse/inventory')
       .subscribe((response) => {
@@ -23,6 +23,6 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.inventoryList = this.getInventory();
+    this.inventoryList = this.fetchInventory();
   }
 }

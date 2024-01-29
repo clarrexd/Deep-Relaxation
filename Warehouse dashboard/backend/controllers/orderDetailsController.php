@@ -4,11 +4,11 @@ require_once __DIR__ . '/../classes/OrderDetails.php';
 
 class OrderDetailsController
 {
-    private OrderDetails $orderDetails;
+    private OrderDetailsList $orderDetails;
 
     public function __construct()
     {
-        $this->orderDetails = new OrderDetails();
+        $this->orderDetails = new OrderDetailsList();
     }
 
     public function processRequest(?int $orderId = null): void
@@ -20,6 +20,7 @@ class OrderDetailsController
                     
                     $data = $this->orderDetails->getOrderDetailsById($orderId);
                     echo json_encode($data);
+                    break;
                 } else {
                     
                     $data = $this->orderDetails->getAllOrderDetails();

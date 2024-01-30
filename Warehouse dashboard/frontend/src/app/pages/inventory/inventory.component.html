@@ -5,5 +5,19 @@
     <span>Color: {{ product.color }}</span>
     <span>Size: {{ product.size }}</span>
     <span>In stock: {{ product.stock_balance }}</span>
+
+    <!-- Display either the stock balance or the editable input based on editMode  -->
+    <span *ngIf="!product.editMode; else editMode">
+      In stock: {{ product.stock_balance }}
+
+      <button (click)="startEditMode(product)">Edit</button>
+    </span>
+
+    <ng-template #editMode>
+      <input type="number" [(ngModel)]="product.updatedStockBalance" />
+      <button (click)="saveChanges(product)">Save</button>
+
+      <button (click)="cancelEditMode(product)">Cancel edit</button>
+    </ng-template>
   </div>
 </section>

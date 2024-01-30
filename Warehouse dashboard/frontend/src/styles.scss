@@ -26,6 +26,16 @@ body {
   border: solid 2px;
 }
 
+.dashboard-row {
+  display: flex;
+  flex-direction: row;
+  width: inherit;
+  height: 5vh;
+  padding: 2%;
+  justify-content: space-between;
+  border: solid 1px;
+}
+
 .full-width-height {
   width: 100%;
   height: 100%;

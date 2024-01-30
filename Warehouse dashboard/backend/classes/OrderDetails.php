@@ -11,37 +11,38 @@ class OrderDetailsList extends Tables
 
     
 
-    public function getAllOrderDetails(): array
+    public function getAllOrderDetails(?int $orderId = null): array
     {
         
         $query = 'SELECT op.orders_id, op.products_id, p.Name, p.color, p.size, op.quantity, o.status
-                  FROM ' . $this->tableName . ' op
+                  FROM orders_products op
                   JOIN products p ON op.products_id = p.id
                   JOIN orders o ON op.orders_id = o.id';
 
+        // If a specific orderId is provided, add a WHERE clause to filter by that orderId
+        if ($orderId !== null) {
+            $query .= ' WHERE op.orders_id = :orderId';
+        }
         $stmt = $this->connection->prepare($query);
+
+        // If a specific orderId is provided, bind the parameter
+        if ($orderId !== null) {
+            $stmt->bindParam(':orderId', $orderId, PDO::PARAM_INT);
+        }
         $stmt->execute();
         $tableContent = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
         return $tableContent;
     }
-}
 
-class OrderDetails extends OrderDetailsList
-{
-
-    public function getOrderDetailsById(int $orderId): array
+        public function getOrderDetailsById(int $orderId): array
     {
-        $query = 'SELECT op.orders_id, op.products_id, p.Name, p.color, p.size, op.quantity, o.status
-                  FROM ' . $this->tableName . ' op
-                  JOIN products p ON op.products_id = p.id
-                  JOIN orders o ON op.orders_id = o.id
-                  WHERE op.orders_id = :orderId';
-
-        $stmt = $this->connection->prepare($query);
-        $stmt->bindParam(':orderId', $orderId);
-        $stmt->execute();
-        $orderDetails = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $orderDetails;
+        return $this->getAllOrderDetails($orderId);
     }
 }
+
+
+
+
+
 ?>

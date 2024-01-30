@@ -1,13 +1,27 @@
 <section class="dashboard-container">
+  <h1>Order ID: {{ orderId }}</h1>
   <div *ngFor="let order of orderDetails">
-    <p>{{ order.orders_id }}</p>
+    Product ID:
     <p>{{ order.products_id }}</p>
+    Product name:
     <p>{{ order.Name }}</p>
+    Color:
     <p>{{ order.color }}</p>
+    Size:
     <p>{{ order.size }}</p>
+    Quantity:
     <p>{{ order.quantity }}</p>
+  </div>
 
-    <!-- Select menu as in order -->
-    <p>{{ order.status }}</p>
+  <span>
+    <label for="newStatus">Update Status:</label>
+    <select id="newStatus" [(ngModel)]="newStatus">
+      <option value="CREATED">CREATED</option>
+      <option value="IN PROCESS">IN PROCESS</option>
+      <option value="SENT">SENT</option>
+    </select>
+  </span>
+  <div class="btn-container">
+    <button type="submit" (click)="updateOrderStatus()">SAVE CHANGES</button>
   </div>
 </section>

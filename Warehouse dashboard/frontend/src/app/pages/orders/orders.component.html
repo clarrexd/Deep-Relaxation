@@ -10,7 +10,7 @@
     <span>
       <label for="status-{{ order.id }}">Status: </label>
       <select id="status-{{ order.id }}">
-        <option value="" disabled selected>
+        <option value="{{ order.status }}" disabled selected>
           {{ order.status | uppercase }}
         </option>
         <option value="CREATED">CREATED</option>

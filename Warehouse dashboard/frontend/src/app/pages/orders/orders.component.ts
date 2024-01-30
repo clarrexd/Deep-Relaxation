@@ -3,14 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
-
-interface Order {
-  id: number;
-  created_at: string;
-  status: string;
-  placed_by: number;
-  totalSum: number;
-}
+import { Order } from '../../core/interfaces';
 
 @Component({
   selector: 'app-orders',

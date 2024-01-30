@@ -20,10 +20,10 @@ class Database:
         await self.connectToDatabase()
         cur = await self.conn.cursor(aiomysql.DictCursor)
         await cur.execute(query)
-        r = await cur.fetchall()
+        result = await cur.fetchall()
         await cur.close()
         self.conn.close()
-        return r
+        return result
 
     
 

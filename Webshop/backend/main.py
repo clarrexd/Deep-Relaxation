@@ -8,7 +8,7 @@ from datetime import datetime
 
 from pymysql import IntegrityError
 import database
-from models import AuthenticateUser, CreateOrder, GoogleUser, RegisterUser
+from models import AuthenticateUser, CreateOrder, GetUserOrders, RegisterUser, UserEmail
 import asyncio
 
 db=database.Database()
@@ -76,7 +76,7 @@ async def registerUser(user:RegisterUser):
         
 
 @app.post('/register-googleuser')
-async def registerGoogleUser(email:GoogleUser):
+async def registerGoogleUser(email:UserEmail):
     """Endpoint for creating a user in the users table for a google user, so the email column remains unique"""
     try:
         result=await db.insertUserFromGoogle(email.email)
@@ -96,9 +96,36 @@ async def createOrder(cartList: CreateOrder):
         import traceback
         print(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(err))
+    
+
+@app.post('/get-user-id', response_model=dict)
+async def getUserIdByEmail(user_data: UserEmail):
+    """Endpoint to get user id based on email"""
+    try:
+        query = f'SELECT id FROM users WHERE email="{user_data.email}"'
+        data = await db.getFromDB(query)
+        
+        if data:
+            return {"id": data[0]["id"]}
+        else:
+            raise HTTPException(status_code=404, detail="User not found with the provided email")
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
 
 
+@app.post('/get-user-orders', response_model=list)
+async def getUserOrders(user_data: GetUserOrders):
+    """Endpoint to get all orders for a user based on user_id"""
+    try:
+        query = f'SELECT * FROM orders WHERE placed_by={user_data.id}'
+        orders_data = await db.getFromDB(query)
 
+        if orders_data:
+            return orders_data
+        else:
+            raise HTTPException(status_code=404, detail="No orders found for the provided user ID")
+    except Exception as err:
+        raise HTTPException(status_code=500, detail=str(err))
 
 
     

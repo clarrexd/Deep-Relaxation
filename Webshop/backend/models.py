@@ -28,7 +28,10 @@ class CreateOrder(BaseModel):
     email:str
     totalSum: int
 
-class GoogleUser(BaseModel):
+class UserEmail(BaseModel):
     email:str
+
+class GetUserOrders(BaseModel):
+    id: int
 
 

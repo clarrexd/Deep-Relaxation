@@ -28,10 +28,10 @@ export const routes: Routes = [
   },
   { path: 'register', component: RegisterComponent, title: 'Sign up' },
   {
-    path: 'dashboard',
+    path: 'my-pages',
     component: UserDashboardComponent,
-    title: 'My dashboard',
-    canActivate: [() => inject(AuthService).dashboardGuard()],
+    title: 'My pages',
+    canActivate: [() => inject(AuthService).mypagesGuard()],
   },
   { path: 'cart', component: CartComponent },
   { path: 'checkout', component: CheckoutComponent },

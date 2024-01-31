@@ -52,11 +52,11 @@ export class AuthService {
 
   loginGuard(): void {
     if (this.isAuthenticated()) {
-      this.router.navigate(['dashboard']);
+      this.router.navigate(['my-pages']);
     }
   }
 
-  dashboardGuard(): void {
+  mypagesGuard(): void {
     if (!this.isAuthenticated()) {
       this.router.navigate(['/login']);
     }

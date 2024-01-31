@@ -10,12 +10,15 @@
   </div>
   <h2>My orders</h2>
   <div class="orders" *ngFor="let order of userOrders">
-    <h3>Order ID: {{ order.id }}</h3>
+    <h3>
+      <u>Order ID: {{ order.id }}</u>
+    </h3>
     <br />
     Created at: {{ order.created_at }} <br />Total: {{ order.total_sum }}
     <br />
     <h4>Status: {{ order.status }}</h4>
-    Order ID: {{ order.id }}
+
     <br />
+    <hr />
   </div>
 </section>

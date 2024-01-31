@@ -23,18 +23,22 @@ export class CartComponent implements OnInit {
   user: any;
 
   purchaseOrder() {
-    this.user = JSON.parse(sessionStorage.getItem('loggedInUser') as string);
-    this.http
-      .post('http://localhost:8000/create-order', {
-        items: this.lsItems,
-        email: this.user.email,
-        totalSum: this.totalSum,
-      })
-      .subscribe((response) => {
-        console.log(response);
-        localStorage.clear();
-        this.router.navigate(['/checkout']);
-      });
+    if (this.lsItems.length < 1) {
+      alert('Your cart is empty!');
+    } else {
+      this.user = JSON.parse(sessionStorage.getItem('loggedInUser') as string);
+      this.http
+        .post('http://localhost:8000/create-order', {
+          items: this.lsItems,
+          email: this.user.email,
+          totalSum: this.totalSum,
+        })
+        .subscribe((response) => {
+          console.log(response);
+        });
+      localStorage.clear();
+      this.router.navigate(['/checkout']);
+    }
   }
 
   ngOnInit(): any {

@@ -10,10 +10,10 @@
       <span>{{ cartItem.quantity }}</span>
     </div>
     <div>
-      <span> {{ cartItem.price }}</span>
+      <span> ${{ cartItem.price }}</span>
     </div>
   </div>
-  <span>Total sum: {{ totalSum }}</span>
+  <span>Total sum: ${{ totalSum }}</span>
   <button class="purchase-btn" (click)="purchaseOrder()">
     Proceed to checkout
   </button>

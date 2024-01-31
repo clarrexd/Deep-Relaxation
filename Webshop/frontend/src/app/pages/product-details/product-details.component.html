@@ -1,7 +1,10 @@
 <section class="placeholder-container">
   <div *ngFor="let productDetail of productDetails">
+    <img src="{{ productDetail.imageURL }}" alt="" />
     <div>
       {{ productDetail.name }}
     </div>
+    <span>{{ productDetail.description }}</span>
+    <span>${{ productDetail.price }}</span>
   </div>
 </section>

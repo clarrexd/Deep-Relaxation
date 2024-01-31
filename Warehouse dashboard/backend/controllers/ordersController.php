@@ -9,7 +9,9 @@ class OrdersController
 
     public function __construct()
     {
+        // echo 'whatever lol';
         $this->orders = new Orders();
+        
     }
 
 
@@ -24,13 +26,13 @@ class OrdersController
                 break;
             case 'PATCH':
 
-            $json_data = json_decode(file_get_contents("php://input"), true);
+                $json_data = json_decode(file_get_contents("php://input"), true);
 
-            if ($json_data === null) {
-                http_response_code(400);
-                echo json_encode(['message' => 'Invalid JSON data']);
-                return;
-            }
+                if ($json_data === null) {
+                    http_response_code(400);
+                    echo json_encode(['message' => 'Invalid JSON data']);
+                    return;
+                }
 
             // Use the properties from the JSON data
             $id_from_json = isset($json_data['id']) ? (int)$json_data['id'] : null;

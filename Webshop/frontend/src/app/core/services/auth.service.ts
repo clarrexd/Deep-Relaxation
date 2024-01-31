@@ -24,13 +24,13 @@ export class AuthService {
   logout(): void {
     if (this.isAuthenticated() === true) {
       sessionStorage.clear();
+
       if (this.googleAuthSubscription) {
         this.googleAuthSubscription.unsubscribe();
       }
       this.socialAuthService.signOut();
+      alert('You have successfully logged out.');
     }
-
-    alert('You have successfully logged out.');
 
     this.isLoggedIn = false;
   }

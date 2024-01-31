@@ -7,7 +7,7 @@ import { MatCommonModule } from '@angular/material/core';
 import { CartService } from '../../core/services/cart.service';
 import { LocalstorageService } from '../../core/services/localstorage.service';
 import { Router } from '@angular/router';
-import { BackendApiService } from '../../core/services/backend-api.service';
+
 import { Product } from '../../core/interfaces';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 

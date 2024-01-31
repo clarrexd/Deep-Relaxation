@@ -15,7 +15,7 @@ import {
   Routes,
 } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { GoogleSigninService } from '../core/services/google-signin.service';
+
 import {
   SocialAuthService,
   GoogleSigninButtonModule,
@@ -55,7 +55,6 @@ export class LoginComponent implements OnInit {
   constructor(
     library: FaIconLibrary,
     private authService: AuthService,
-    private googleSignIn: GoogleSigninService,
     private router: Router,
     private socialAuthService: SocialAuthService,
     private formBuilder: FormBuilder,

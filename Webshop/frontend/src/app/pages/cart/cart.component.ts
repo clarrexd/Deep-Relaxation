@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../core/services/cart.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LocalstorageService } from '../../core/services/localstorage.service';
+import { ReloadService } from '../../core/services/reload.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +17,8 @@ export class CartComponent implements OnInit {
   constructor(
     private cartservice: CartService,
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private reloadService: ReloadService
   ) {}
 
   lsItems: Array<any> = [];
@@ -37,6 +40,7 @@ export class CartComponent implements OnInit {
           console.log(response);
         });
       localStorage.clear();
+
       this.router.navigate(['/checkout']);
     }
   }
@@ -46,5 +50,11 @@ export class CartComponent implements OnInit {
     this.totalSum = this.lsItems.reduce(function (acc, obj) {
       return acc + obj.price * obj.quantity;
     }, 0);
+
+    //Makes sure localstorage is clear so that the user can make another purchase in the same session
+    if (localStorage.getItem('cart') === null) {
+      localStorage.setItem('cart', '[]');
+      location.reload();
+    }
   }
 }

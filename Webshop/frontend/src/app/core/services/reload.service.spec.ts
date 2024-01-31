@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BackendApiService } from './backend-api.service';
+import { ReloadService } from './reload.service';
 
-describe('BackendApiService', () => {
-  let service: BackendApiService;
+describe('ReloadService', () => {
+  let service: ReloadService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BackendApiService);
+    service = TestBed.inject(ReloadService);
   });
 
   it('should be created', () => {

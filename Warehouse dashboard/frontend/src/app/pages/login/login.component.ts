@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { Router } from '@angular/router';
+import { catchError, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -29,19 +30,32 @@ export class LoginComponent implements OnInit {
 
   authenticateUser(formData: any) {
     this.http
-      .post('http://localhost:8000/authenticate-user', formData)
+      .post('http://localhost:8000/authenticate-user', formData, {
+        params: { required_role: 'admin' },
+      })
+      .pipe(
+        catchError((error) => {
+          console.error('Error during authentication:', error);
+          this.showLoginFailedAlert();
+          return throwError(() => error);
+        })
+      )
       .subscribe((response: any) => {
         if (response) {
           console.log(response);
           this.login();
           sessionStorage.setItem('loggedInUser', JSON.stringify(response));
           this.router.navigate(['dashboard']);
-          return true;
         } else {
-          alert('Incorrect login details. Please try again.');
-          return false;
+          this.showLoginFailedAlert();
         }
       });
+  }
+
+  showLoginFailedAlert() {
+    alert(
+      'Incorrect login details or insufficient permissions. Please try again.'
+    );
   }
 
   submitUserLogin() {

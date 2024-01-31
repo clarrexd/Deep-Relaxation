@@ -1,6 +1,6 @@
 #python3 -m uvicorn main:app --reload
 #endpoint = localhost:8000/[endpoint]
-from typing import Union
+from typing import Optional, Union
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -53,10 +53,10 @@ async def findLatestRegisteredUser(user_id: int):
 
 
 @app.post('/authenticate-user')
-async def authenticateUser(user:AuthenticateUser):
+async def authenticateUser(user:AuthenticateUser, required_role: Optional[str] = None):
     """Endpoint for authenticating users when logging in."""
     try:
-        result = await db.authenticateUser(user.username, user.password)
+        result = await db.authenticateUser(user.username, user.password, required_role)
         if result:
             return result
         else:

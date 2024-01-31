@@ -4,7 +4,6 @@
     <span>Name: {{ product.name }}</span>
     <span>Color: {{ product.color }}</span>
     <span>Size: {{ product.size }}</span>
-    <span>In stock: {{ product.stock_balance }}</span>
 
     <!-- Display either the stock balance or the editable input based on editMode  -->
     <span *ngIf="!product.editMode; else editMode">

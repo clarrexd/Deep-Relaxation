@@ -54,12 +54,12 @@ class Database:
         return result
     
 
-    async def authenticateUser(self, username: str, password: str):
+    async def authenticateUser(self, username: str, password: str, required_role: str = None):
         await self.connectToDatabase()
         cur = await self.conn.cursor(aiomysql.DictCursor)
 
         # Retrieve stored hashed password and salt for the given username
-        query = "SELECT username,password, email FROM users WHERE username = %s"
+        query = "SELECT username,password, email, role FROM users WHERE username = %s"
         await cur.execute(query, [username])
         user_data = await cur.fetchone()
 
@@ -69,6 +69,12 @@ class Database:
             # Check if the entered password matches the stored hashed password
             if bcrypt.checkpw(password.encode('utf-8'), stored_hashed_password.encode('utf-8')):
                 del user_data['password']
+
+
+                        # Check if the user has the required role, if provided
+                if required_role and user_data.get('role') != required_role:
+                    return False
+            
                 return user_data
             else:
                 return False

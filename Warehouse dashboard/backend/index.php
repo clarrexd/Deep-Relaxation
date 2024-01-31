@@ -6,7 +6,8 @@ require_once __DIR__ . '/controllers/orderDetailsController.php';
 
 
 
-header('Content-Type: application/json');
+// header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
 
 
 $URI = $_SERVER['REQUEST_URI'];

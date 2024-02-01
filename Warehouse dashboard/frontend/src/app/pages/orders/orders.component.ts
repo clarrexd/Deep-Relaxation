@@ -4,6 +4,7 @@ import { ApiService } from '../../core/services/api.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Order } from '../../core/interfaces';
+import { EMPTY, catchError, forkJoin, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-orders',
@@ -18,6 +19,7 @@ export class OrdersComponent implements OnInit {
   //Variable to hold all orders
   ordersList: Order[] = [];
 
+  //GET request to get all orders
   getAllOrders() {
     this.http
       .get<Order[]>('http://localhost:9000/warehouse/orders')
@@ -26,27 +28,34 @@ export class OrdersComponent implements OnInit {
       });
   }
 
-  updateOrderStatus(order: Order, newStatus: string): void {
-    this.http
-      .patch('http://localhost:9000/warehouse/orders', {
-        id: order.id,
-        status: newStatus,
-      })
-      .subscribe((response) => {
-        alert('Status changes updated successfully');
-      });
-  }
-
+  //Update status changes based on input value
   updateStatusChanges(): void {
-    //Loop to update all statuses to their selected value
-    this.ordersList.forEach((order) => {
+    const observables = this.ordersList.map((order) => {
       const newStatus = (
         document.getElementById(`status-${order.id}`) as HTMLSelectElement
       ).value;
-      this.updateOrderStatus(order, newStatus);
+
+      return this.http
+        .patch('http://localhost:9000/warehouse/orders', {
+          id: order.id,
+          status: newStatus,
+        })
+        .pipe(
+          catchError((error) => {
+            alert(`Error updating order ${order.id}:, ${error}`);
+
+            return EMPTY;
+          })
+        );
+    });
+
+    //Alert message when the PATCH requests are finished
+    forkJoin(observables).subscribe((responses) => {
+      alert('Status changes updated successfully');
     });
   }
 
+  //Go to order details for a specific order
   goToOrderDetail(order: Order) {
     this.router.navigate(['dashboard/orders', order.id]);
   }

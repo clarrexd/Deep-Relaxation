@@ -15,6 +15,7 @@ export class InventoryComponent implements OnInit {
 
   constructor(private http: HttpClient) {}
 
+  //GET request to fetch inventory (products)
   fetchInventory() {
     this.http
       .get('http://localhost:9000/warehouse/inventory')

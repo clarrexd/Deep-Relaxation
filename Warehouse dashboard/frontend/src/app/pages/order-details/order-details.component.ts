@@ -19,6 +19,7 @@ export class OrderDetailsComponent implements OnInit {
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
+  //GET request to getting order details for a specific order
   getOrderDetails() {
     this.http
       .get<any>(`http://localhost:9000/warehouse/order-details/${this.orderId}`)
@@ -28,6 +29,7 @@ export class OrderDetailsComponent implements OnInit {
       });
   }
 
+  //PATCH request for updating status of the order
   updateOrderStatus(): void {
     this.http
       .patch('http://localhost:9000/warehouse/orders', {

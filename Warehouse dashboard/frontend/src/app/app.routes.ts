@@ -8,6 +8,7 @@ import { InventoryComponent } from './pages/inventory/inventory.component';
 import { AuthService } from './core/services/auth.service';
 import { inject } from '@angular/core';
 
+//Route guards used to protect certain URLs from being accessed if certain conditions are not met. See individual functions for each condition.
 export const routes: Routes = [
   {
     path: 'login',

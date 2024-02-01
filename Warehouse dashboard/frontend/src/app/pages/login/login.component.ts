@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient
   ) {}
 
+  //Sending input from login form to authenticate upon logging on. Checking if user has an admin role assigned.
   authenticateUser(formData: any) {
     this.http
       .post('http://localhost:8000/authenticate-user', formData, {
@@ -58,6 +59,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  //Submits formdata from input
   submitUserLogin() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;

@@ -9,7 +9,7 @@ class OrdersController
 
     public function __construct()
     {
-        // echo 'whatever lol';
+        
         $this->orders = new Orders();
         
     }
@@ -18,6 +18,7 @@ class OrdersController
 
     public function processRequest(?int $id = null): void
     {
+        //Function for handling the request made
         $method = $_SERVER['REQUEST_METHOD'];
         switch ($method) {
             case 'GET':

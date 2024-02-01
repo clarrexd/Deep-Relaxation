@@ -22,6 +22,7 @@ $URI = trim($URI, '/');
 
 
 try {
+    //Split the URL into different parts with the divider "/" to separate each part
     $parts = explode('/', $URI);
 
     if ($parts[0] == "warehouse") {
@@ -42,7 +43,7 @@ try {
             default:
                 throw new Exception("Invalid path");
         }
-
+        //Check to see that the third part of the URL must be a number to match for an id
         if(count($parts) > 2){
             if (is_numeric($parts[2])) {
                 $id = (int) $parts[2];

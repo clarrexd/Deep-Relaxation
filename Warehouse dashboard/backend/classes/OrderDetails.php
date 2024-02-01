@@ -10,7 +10,7 @@ class OrderDetailsList extends Tables
     protected string $tableName = 'orders_products';
 
     
-
+    //Fetch order details for a specific order with more information than what is in orders_products table via JOIN so the user can also see name of the product etc
     public function getAllOrderDetails(?int $orderId = null): array
     {
         

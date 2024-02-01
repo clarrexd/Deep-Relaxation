@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 
 class Database
 {
+    //Database information needed to establish a connection to the database
     protected PDO $connection;
     private const HOST = 'localhost';
     private const DB_NAME = 'deep_relaxation';
@@ -14,7 +15,7 @@ class Database
 
 
 
-
+    //Constructor for enabling a connection to the database
     public function __construct()
     {
 

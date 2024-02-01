@@ -11,6 +11,7 @@ class OrderDetailsController
         $this->orderDetails = new OrderDetailsList();
     }
 
+    //Fetches order details for a specific order if id is provided, returns all if id is not provided. id is null by default to make it optional
     public function processRequest(?int $orderId = null): void
     {
         $method = $_SERVER['REQUEST_METHOD'];

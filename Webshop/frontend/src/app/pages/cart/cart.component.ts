@@ -25,6 +25,7 @@ export class CartComponent implements OnInit {
   totalSum: number = 0;
   user: any;
 
+  //Purchase function. Fetches user info from session storage and posts data to backend to create the order then clears localstorage and navigates user to the checkout page
   purchaseOrder() {
     if (this.lsItems.length < 1) {
       alert('Your cart is empty!');
@@ -47,6 +48,8 @@ export class CartComponent implements OnInit {
 
   ngOnInit(): any {
     this.lsItems = this.cartservice.cartList;
+
+    //Calculate total cost
     this.totalSum = this.lsItems.reduce(function (acc, obj) {
       return acc + obj.price * obj.quantity;
     }, 0);

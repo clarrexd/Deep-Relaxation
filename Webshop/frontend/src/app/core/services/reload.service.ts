@@ -9,6 +9,7 @@ export class ReloadService {
   private readonly checkoutreloadKey = 'checkoutPageReloaded';
   private readonly cartreloadKey = 'checkoutPageReloaded';
 
+  //Functions to set and retrieve key values from session storage whether the page has been reloaded, to not create an infinite loop of page reloads
   setReloadedCheckout() {
     sessionStorage.setItem(this.checkoutreloadKey, 'true');
   }

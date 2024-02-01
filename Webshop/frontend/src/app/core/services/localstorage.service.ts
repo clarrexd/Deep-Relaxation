@@ -6,10 +6,12 @@ import { Injectable } from '@angular/core';
 export class LocalstorageService {
   constructor() {}
 
+  //Sets items put in the cart to localstorage
   setItemCart(items: any) {
     localStorage.setItem('cart', JSON.stringify(items));
   }
 
+  //Gets cart items from localstorage
   getItemCart() {
     const getItems = JSON.parse(localStorage.getItem('cart') as string);
 
@@ -19,6 +21,7 @@ export class LocalstorageService {
     return getItems;
   }
 
+  //Function to fetch items from localstorage
   fetchItemsFromLS() {
     const getItemsFromLS = JSON.parse(localStorage.getItem('cart') as string);
     return getItemsFromLS;

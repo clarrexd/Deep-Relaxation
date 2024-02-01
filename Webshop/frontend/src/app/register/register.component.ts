@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
   private destroy$: Subject<void> = new Subject<void>();
   private submitted = false;
 
-  //Function for post request to backend
+  //Function for post request to backend to register user and navigate the user back to the login page to login with their newly registered account
   registerUser(formData: any) {
     this.http
       .post(this.registerUserUrl, formData)

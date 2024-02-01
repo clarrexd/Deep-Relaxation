@@ -14,6 +14,7 @@ import { inject } from '@angular/core';
 import { AuthService } from './core/services/auth.service';
 import { CheckoutComponent } from './pages/checkout/checkout.component';
 
+//Routes with route guards that prohibits user from accessing certain URLs if conditions are not met. See individual functions for exact conditions.
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },

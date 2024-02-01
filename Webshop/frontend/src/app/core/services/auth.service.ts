@@ -16,11 +16,13 @@ export class AuthService {
     private socialAuthService: SocialAuthService
   ) {}
 
+  //Login function with alert
   login(): void {
     this.isLoggedIn = true;
     alert('You have successfully logged in!');
   }
 
+  //Logout function, clears sessionstorage where the loggedin key is and unsubscribes too googleAuth if the user was logged in through Google
   logout(): void {
     if (this.isAuthenticated() === true) {
       sessionStorage.clear();
@@ -35,6 +37,7 @@ export class AuthService {
     this.isLoggedIn = false;
   }
 
+  //Checks if the user is logged in, returns true or false
   isAuthenticated(): boolean {
     if (!this.isLoggedIn && sessionStorage.getItem('loggedInUser') !== null) {
       this.isLoggedIn = true;
@@ -42,6 +45,7 @@ export class AuthService {
     return this.isLoggedIn;
   }
 
+  //Toggle for login & logout
   toggleAuthentication(): void {
     if (this.isLoggedIn) {
       this.logout();
@@ -50,12 +54,14 @@ export class AuthService {
     }
   }
 
+  //Navigates the user to my-pages if they are logged in. Cannot access login page if logged in
   loginGuard(): void {
     if (this.isAuthenticated()) {
       this.router.navigate(['my-pages']);
     }
   }
 
+  //Navigates the user to login page if the user is not logged in. Cannot acces my-pages if not logged in
   mypagesGuard(): void {
     if (!this.isAuthenticated()) {
       this.router.navigate(['/login']);

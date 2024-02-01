@@ -7,5 +7,6 @@ import { LocalstorageService } from './localstorage.service';
 export class CartService {
   constructor(private localstorage: LocalstorageService) {}
 
+  //Holds cart items
   cartList: any = [];
 }

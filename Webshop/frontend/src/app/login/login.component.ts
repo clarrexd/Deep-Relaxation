@@ -61,11 +61,8 @@ export class LoginComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  delay(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-  }
-
   ngOnInit(): void {
+    //Google login. Sets sessionstorage key, sets logged in state to true and navigates the user to my-pages upon successful login via Google
     this.authService.googleAuthSubscription =
       this.socialAuthService.authState.subscribe((user) => {
         console.log(user);
@@ -84,6 +81,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  //Submits form data
   submitUserLogin() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
@@ -91,6 +89,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  //Submits form data to the backend to authenticate user for login
   authenticateUser(formData: any) {
     this.http
       .post('http://localhost:8000/authenticate-user', formData)

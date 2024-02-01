@@ -16,6 +16,7 @@ export class ProductDetailsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
 
+  //GET request to get product details
   getProductDetails() {
     return this.http
       .get(`http://localhost:8000/products/${this.productId}`)
@@ -25,6 +26,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //Gives the variable productId the value of the parameters, which is the id of the product
     this.route.params.subscribe((params) => {
       this.productId = params['product_id'];
     });

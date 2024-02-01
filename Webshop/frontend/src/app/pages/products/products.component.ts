@@ -48,6 +48,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
+  //Add items to cart. Finds quantity per item and adds them together.
   addToCart(item: any) {
     let fetchedItems: Array<any> = this.localstorage.fetchItemsFromLS();
 

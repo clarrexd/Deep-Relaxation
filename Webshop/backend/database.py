@@ -16,7 +16,7 @@ class Database:
 
     
     async def getFromDB(self, query):
-        """Call this function in every GET endpoint to fetch data from the database"""
+        """GET function for fetching data"""
         await self.connectToDatabase()
         cur = await self.conn.cursor(aiomysql.DictCursor)
         await cur.execute(query)
@@ -29,6 +29,7 @@ class Database:
 
 
     async def insertUser(self, user:RegisterUser):
+        """Function for registering a new user to the users table in the database"""
         await self.connectToDatabase()
         cur: Cursor = await self.conn.cursor(aiomysql.DictCursor)
         hashed_password = bcrypt.hashpw(user.password.encode('utf-8'), bcrypt.gensalt())
@@ -43,6 +44,7 @@ class Database:
         return result
     
     async def insertUserFromGoogle(self, email:str):
+        """Creating a user in the users table from a Google login to match users who created an order when logged in via Google"""
         await self.connectToDatabase()
         cur: Cursor = await self.conn.cursor(aiomysql.DictCursor)
         query = "INSERT INTO users (email) VALUES (%s)"
@@ -55,6 +57,7 @@ class Database:
     
 
     async def authenticateUser(self, username: str, password: str, required_role: str = None):
+        """Authenticate user when logging in"""
         await self.connectToDatabase()
         cur = await self.conn.cursor(aiomysql.DictCursor)
 
@@ -83,6 +86,7 @@ class Database:
 
 
     async def insertOrder(self, cartList:CreateOrder):
+        """Create a new order into the orders table. Insert data into orders_products table to match what products are in what order and update stock balance in inventory table based on quantity of items placed in the order"""
         await self.connectToDatabase()
         cur:Cursor = await self.conn.cursor(aiomysql.DictCursor)
         query = "SELECT id FROM users WHERE email=%s"

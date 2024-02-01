@@ -122,9 +122,9 @@ class Database:
             
          # Update stock_balance in inventory table based on quantity per item
             query = "UPDATE inventory SET stock_balance = stock_balance - %s WHERE product_id = %s"
-            await cur.execute(query, [product.quantity, product.id])
+            update_result = await cur.execute(query, [product.quantity, product.id])
 
-            if result != 1:
+            if update_result != 1:
                 await self.conn.rollback()
                 raise Exception("Failed to update stock_balance in the inventory table.")
             

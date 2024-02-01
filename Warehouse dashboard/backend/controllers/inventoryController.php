@@ -39,7 +39,7 @@ class InventoryController
                 http_response_code(400);
                 echo json_encode(['message' => 'Invalid request body. Both "id" and "stock_balance" are required.']);
             }
-            break;
+                break;
             default:
                 http_response_code(405);
                 echo json_encode(['message' => 'Method not allowed']);

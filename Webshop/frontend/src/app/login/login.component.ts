@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
           console.log(response);
           this.login();
           sessionStorage.setItem('loggedInUser', JSON.stringify(response));
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['my-pages']);
           return true;
         } else {
           alert('Incorrect login details. Please try again.');

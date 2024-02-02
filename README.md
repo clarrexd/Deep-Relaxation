@@ -24,7 +24,7 @@ This is a list of what has been used when creating this project:
 
 - Open the XAMPP control panel and start the MySQL server.
 
-- Create the database by running the code in the sql file in the Database folder in MySQL Workbench (or some other visual database design tool). There is already data in the database tables for test purposes, including an admin account in the users table to login to the warehouse dashboard.
+- Create the database locally by running the code in the sql file in the Database folder in MySQL Workbench (or some other visual database design tool). There is already data in the database tables for test purposes, including an admin account in the users table to login to the warehouse dashboard.
 
 After this has been done, you need to start the backend servers. Start by navigating to Deep Relaxation/Webshop/backend in your terminal and run:
 

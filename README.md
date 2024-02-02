@@ -4,6 +4,8 @@ The project in its current form is not a finished product and should be regarded
 
 The idea behind this project is to have a webshop and a warehouse dashboard that can communicate with each other. This is done in the backend via APIs. When a status is changed on an order in the warehouse dashboard, the user that has placed that order can see what the new status is.
 
+The project has two backends because it was requested that PHP was used somewhere in the project.
+
 # Requirements
 
 This is a list of what has been used when creating this project:

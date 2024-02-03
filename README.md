@@ -6,6 +6,8 @@ The idea behind this project is to have a webshop and a warehouse dashboard that
 
 The project has two backends because it was requested that PHP was used somewhere in the project.
 
+User testing has been done in the latest versions of both Google Chrome and Firefox at the time of writing (2024-02-03).
+
 # Requirements
 
 This is a list of what has been used when creating this project:
